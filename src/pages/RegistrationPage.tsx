@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../assets/styles/registration.scss';
 
-const Registration: React.FC = () => {
+interface RegistrationProps {
+  onClose: () => void;
+}
+
+const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -12,11 +15,18 @@ const Registration: React.FC = () => {
     console.log('Email:', email);
     console.log('Password:', password);
     console.log('Confirm Password:', confirmPassword);
+    onClose();
   };
 
   return (
     <div className="register-container">
       <div className="register-box">
+        {/* Dodajte sliku iznad naslova */}
+        <img 
+          src="./src/assets/images/Page0.png"
+          alt="Logo"
+          className="form-logo"
+        />
         <h2>Create an Account</h2>
         <p>Join us to get started</p>
         <form onSubmit={handleSubmit}>
@@ -51,9 +61,6 @@ const Registration: React.FC = () => {
             Sign Up
           </button>
         </form>
-        <div className="login-link">
-          Already have an account? <Link to="/login">Log in here</Link>
-        </div>
       </div>
     </div>
   );

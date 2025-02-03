@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #ff6f61, #ff4b4b); // Same gradient as registration
   animation: gradientAnimation 10s ease infinite;
   background-size: 200% 200%;
 
@@ -79,6 +78,14 @@
         transform: translateY(0);
       }
     }
+    .form-logo {
+      max-width: 200px; // Prilagodite veličinu
+      margin: 0 auto 0px; // Centrirajte i dodajte razmak ispod
+      display: block;
+    
+  
+    
+    }
 
     .register-link {
       margin-top: 1.5rem;
@@ -125,3 +132,4 @@
     padding: 1.5rem;
   }
 }
+
