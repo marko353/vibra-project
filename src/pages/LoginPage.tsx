@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import '../assets/styles/login.scss';
 
-const Login: React.FC = () => {
+interface LoginProps {
+  onClose: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -10,11 +13,17 @@ const Login: React.FC = () => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
+    onClose(); // Zatvori modal nakon uspešnog logina
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
+      <img 
+          src="./src/assets/images/Page0.png"
+          alt="Logo"
+          className="form-logo"
+        />
         <h2>Welcome Back!</h2>
         <p>Sign in to continue</p>
         <form onSubmit={handleSubmit}>
@@ -40,9 +49,7 @@ const Login: React.FC = () => {
             Sign In
           </button>
         </form>
-        <div className="register-link">
-          Don't have an account? <Link to="/registration">Sign up here</Link>
-        </div>
+    
       </div>
     </div>
   );
