@@ -14,13 +14,14 @@
     align-items: center;
 
     img {
-      height: 10rem; // Originalna veličina
+      height: 10rem;
       filter: brightness(0) invert(1);
       transition: height 0.3s ease;
     }
   }
+
   .mobile-menu {
-    display: none; /* Sakrij meni na većim ekranima */
+    display: none;
   }
 
   .navbar-links {
@@ -44,9 +45,7 @@
       }
     }
   }
-  .hamburger.active .bar {
-    background-color: black; /* Postavljamo crnu boju kada je meni otvoren */
-  }
+
   .navbar-login {
     margin-left: auto;
     margin-right: 2rem;
@@ -68,7 +67,6 @@
     }
   }
 
-  // Burger dugme (po defaultu skriveno)
   .hamburger {
     display: none;
     background: none;
@@ -86,13 +84,12 @@
   }
 }
 
-// RESPONSIVE MEDIA QUERIES
 @media (max-width: 1024px) {
   .navbar {
     padding: 1rem;
 
     .navbar-logo img {
-      height: 8rem; // Smanjen logo
+      height: 8rem;
     }
 
     .navbar-links li {
@@ -118,26 +115,25 @@
     align-items: center;
 
     .navbar-logo img {
-      height: 5rem; // Još manje za tablete
+      height: 5rem;
     }
 
     .navbar-links {
-      display: none; // Sakrij standardne linkove
+      display: none;
     }
 
     .navbar-login {
-      display: none; // Sakrij login dugme
+      display: none;
     }
 
     .hamburger {
-      display: block; // Prikazi burger meni
+      display: block;
       position: absolute;
       right: 2rem;
       top: 1.5rem;
     }
   }
 
-  // Stilizovani mobilni meni
   .mobile-menu {
     position: fixed;
     top: 0;
@@ -199,7 +195,7 @@
       .login-btn {
         background-color: white;
         color: black;
-        order: -1; // Prebacuje login dugme iznad "Create Account"
+        order: -1;
       }
     }
   }
@@ -233,33 +229,17 @@
     padding: 0.5rem;
 
     .navbar-logo img {
-      height: 5rem; // Najmanja veličina logotipa za mobilne
+      height: 5rem;
     }
   }
 
-  // Prilagodba mobilnog menija za manje uređaje
   .mobile-menu {
     padding: 5rem 2rem 2rem;
-    @media (max-width: 480px) {
-      .navbar {
-        padding: 0.5rem;
-    
-        .navbar-logo img {
-          height: 5rem; // Najmanja veličina logotipa za mobilne
-        }
-      }
-    
-     
-      .mobile-menu {
-        padding: 5rem 2rem 2rem;
-      }
-    
-      .hamburger .bar {
-        width: 25px; // Smanjena širina linija
-        height: 2px; // Smanjena visina linija
-        margin: 5px 0; // Smanjen razmak između linija
-      }
+
+    .hamburger .bar {
+      width: 25px;
+      height: 2px;
+      margin: 5px 0;
     }
-    
   }
 }

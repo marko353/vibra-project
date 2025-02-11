@@ -17,7 +17,7 @@ const Home: React.FC = () => {
       />
       <h1> Let’s vibe together!</h1>
       
-      {/* Dugme za login i registraciju */}
+      {/* Login dugme iznad Create Account dugmeta */}
       <div className="button-group">
         <div className="login-btn">
           <a href="#" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>
