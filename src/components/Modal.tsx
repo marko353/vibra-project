@@ -11,12 +11,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Proveri kliknuti element
-      console.log("Kliknut element:", event.target);
-
-      // Proveri da li je kliknut element van modala
+      console.log('Clicked outside'); // Debugging
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        console.log("Klik van modala - zatvaram");
+        console.log('Closing modal'); // Debugging
         onClose();
       }
     };
@@ -34,10 +31,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal-overlay">
-      <div ref={modalRef} className="modal-box">
-        <button className="close-button" onClick={onClose}>
-          &times;
-        </button>
+      <div className="modal-box" ref={modalRef}>
         {children}
       </div>
     </div>
