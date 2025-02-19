@@ -1,0 +1,152 @@
+.profile-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f4;
+  height: 100vh;
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 500px; // Fiksna visina slidera
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    display: flex;
+    flex-direction: column;
+
+    .user-info {
+      position: absolute; // Postavljamo iznad slidera
+      top: 10px; // Uz gornju ivicu
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: flex-start; // Poravnanje sa leve strane
+      align-items: center; // Poravnava ime i godine u horizontalnoj liniji
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.3); // Tamna pozadina za tekst
+      color: #fff; // Tekst svetle boje
+      border-radius: 8px;
+      z-index: 1;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff6f61; // Boja imena
+        margin-right: 15px; // Razmak između imena i godina
+      }
+
+      p {
+        font-size: 24px;
+        color: #fff; // Boja za godine
+      }
+    }
+  }
+
+  .image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .prev,
+  .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 10;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .prev:hover,
+  .next:hover {
+    opacity: 1;
+  }
+
+  .edit-button-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .edit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff6f61;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .edit-button:hover {
+    background-color: #e55a4f;
+  }
+  .profile-slider {
+    position: relative;
+    height: 100%;  // Da bi slider zauzeo celokupnu visinu
+  }
+  
+  .user-info {
+    position: absolute;  // Pozicionira se iznad slike
+    top: 10px;  // Udaljeno od gornje ivice
+    left: 0;  // Poravnanje sa levom ivicom
+    width: 100%;  // Širina kao i slider
+    background: rgba(0, 0, 0, 0.5);  // Poluprozirna crna pozadina
+    display: flex;
+    justify-content: center;  // Centriranje sadržaja horizontalno
+    align-items: center;  // Centriranje sadržaja vertikalno
+    padding: 10px 20px;  // Unutrašnji razmak
+    box-sizing: border-box;  // Da padding ne utiče na širinu
+    z-index: 1;  // Da bude iznad slike
+    margin-bottom: 15px;  // Razmak između user-info i slike
+  
+    h1 {
+      font-size: 36px;  // Veći font za ime
+      color: white;
+      margin: 0;
+      font-weight: bold;
+    }
+  
+    p {
+      font-size: 28px;  // Manji font za godine
+      color: white;
+      margin: 0;
+      font-weight: 300;
+    }
+  }
+  
+}

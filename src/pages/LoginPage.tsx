@@ -27,18 +27,29 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
   });
 
   const onSubmit = async (data: FormData) => {
+    console.log("onSubmit called with data:", data); // Proveri da li je funkcija pozvana
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email: data.email,
         password: data.password,
       });
-
+  
+      // Čuvamo token u localStorage
       localStorage.setItem('token', response.data.token);
-      navigate('/welcome');
+  
+      // Dodaj log ovde da proveriš token
+      const token = localStorage.getItem('token');
+      console.log("Token saved:", token);
+  
+      // Nakon uspešnog login-a, preusmeri korisnika na stranicu profila
+      navigate('/profile'); // Preusmeravanje na profil stranici
+  
     } catch (error) {
+      console.error("Login error:", error);
       setError('Invalid email or password');
     }
   };
+  
 
   const handleClickOutside = (e: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -62,11 +73,19 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
         <p>Sign in to continue</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
-            <input type="email" placeholder="Email" {...register("email")} />
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+            />
             {errors.email && <p className="error-message">{errors.email.message}</p>}
           </div>
           <div className="form-group">
-            <input type="password" placeholder="Password" {...register("password")} />
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password")}
+            />
             {errors.password && <p className="error-message">{errors.password.message}</p>}
           </div>
           {error && <p className="error-message">{error}</p>}

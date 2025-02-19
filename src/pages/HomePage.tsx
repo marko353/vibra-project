@@ -29,7 +29,7 @@ const Home: React.FC = () => {
             Create account
           </a>
         </div>
-      </div>
+      </div>z
 
       {/* Login Modal */}
       <Modal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)}>
