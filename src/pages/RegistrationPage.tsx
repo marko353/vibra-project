@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import '../assets/styles/registration.scss';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +19,15 @@ const schema = z
       .string()
       .min(6, "Confirm Password must be at least 6 characters long")
       .nonempty("Confirm Password is required"),
+    fullName: z
+      .string()
+      .nonempty("Full name is required"),
+    birthDate: z
+      .string()
+      .nonempty("Birth date is required")
+      .refine((val) => !isNaN(Date.parse(val)), {
+        message: "Please enter a valid birth date",
+      }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -31,6 +40,7 @@ interface RegistrationProps {
 
 const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const {
     register,
@@ -41,28 +51,29 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
   });
 
   const onSubmit = async (data: any) => {
+    console.log('Submitted data:', data); // Proveri šta se šalje
     try {
       const response = await axios.post("http://localhost:5000/api/auth/register", {
+        name: data.fullName,
         username: data.email.split('@')[0],
         email: data.email,
         password: data.password,
-        birthDate: "2000-01-01",
-        adress: "Neka ulica 1",
-        country: "Serbia",
+        fullName: data.fullName,
+        birthDate: data.birthDate, // Ovdje šalješ već u formatu YYYY-MM-DD
       });
-      
+
       console.log(response.data);
       onClose();
     } catch (error: any) {
       if (error.response) {
-        console.error("Error during registration:", error.response.data);
-        alert(error.response.data.message || "Error during registration, please try again.");
+        console.error("Response error:", error.response.data);
+        setServerError(error.response.data.message || "Server error occurred.");
       } else if (error.request) {
         console.error("No response received:", error.request);
-        alert("No response from server, please check your connection.");
+        setServerError("No response from server.");
       } else {
-        console.error("Error during registration:", error.message);
-        alert("An error occurred, please try again.");
+        console.error("Error in Axios request:", error.message);
+        setServerError("Unexpected error.");
       }
     }
   };
@@ -94,35 +105,56 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <input
+              type="text"
+              placeholder="Name"
+              {...register("fullName")}
+              autoFocus
+              className={errors.fullName ? 'error-input' : ''}
+            />
+            {errors.fullName && <p className="error">{String(errors.fullName.message)}</p>}
+          </div>
+          <div className="form-group">
+            <input
+              type="date"  // Koristi tip "date"
+              placeholder="Birth Date"
+              {...register("birthDate")}
+              className={errors.birthDate ? 'error-input' : ''}
+            />
+            {errors.birthDate && <p className="error">{String(errors.birthDate.message)}</p>}
+          </div>
+
+          <div className="form-group">
+            <input
               type="email"
               placeholder="Email"
               {...register("email")}
-              autoFocus
+              className={errors.email ? 'error-input' : ''}
             />
-            {errors.email && (
-              <p className="error">{String(errors.email.message)}</p>
-            )}
+            {errors.email && <p className="error">{String(errors.email.message)}</p>}
           </div>
+
           <div className="form-group">
             <input
               type="password"
               placeholder="Password"
               {...register("password")}
+              className={errors.password ? 'error-input' : ''}
             />
-            {errors.password && (
-              <p className="error">{String(errors.password.message)}</p>
-            )}
+            {errors.password && <p className="error">{String(errors.password.message)}</p>}
           </div>
+
           <div className="form-group">
             <input
               type="password"
               placeholder="Confirm Password"
               {...register("confirmPassword")}
+              className={errors.confirmPassword ? 'error-input' : ''}
             />
-            {errors.confirmPassword && (
-              <p className="error">{String(errors.confirmPassword.message)}</p>
-            )}
+            {errors.confirmPassword && <p className="error">{String(errors.confirmPassword.message)}</p>}
           </div>
+
+          {serverError && <p className="server-error">{serverError}</p>}
+
           <button
             type="submit"
             className="register-button"

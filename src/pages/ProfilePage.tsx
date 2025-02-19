@@ -1,82 +1,68 @@
-import React, { useState } from 'react';
-import '../assets/styles/profile.scss';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import "../assets/styles/profilePage.scss";
+import ProfileSlider from "../components/ProfileSlider";
 
-const Profile: React.FC = () => {
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [isEditing, setIsEditing] = useState(true); // State za prebacivanje između Edit i Slider moda
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface User {
+  fullName: string;
+  birthDate: string;
+}
 
-  // Dodavanje slika
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    if (event.target.files && event.target.files[0]) {
-      const newPhotos = [...photos];
-      newPhotos[index] = URL.createObjectURL(event.target.files[0]);
-      setPhotos(newPhotos);
+const ProfilePage: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [images, setImages] = useState<string[]>([]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const fetchUserImages = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:5000/api/user/profile-pictures", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("Slike preuzete:", response.data.profilePictures);
+        setImages(response.data.profilePictures);
+      } catch (error) {
+        console.error("Greška pri preuzimanju slika:", error);
+      }
+    };
+
+    fetchUserImages();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:5000/api/user/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (location.state && (location.state as any).images) {
+      setImages((location.state as any).images);
     }
-  };
+  }, [location.state]);
 
-  // Brisanje slika
-  const removeImage = (index: number) => {
-    const newPhotos = photos.filter((_, i) => i !== index);
-    setPhotos(newPhotos);
-  };
-
-  // Navigacija slidera
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
-  };
+  if (!user) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="profile-container">
-      {isEditing ? (
-        <div className="edit-photos">
-          <div className="profile-card">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div key={index} className="profile-photo">
-                {photos[index] ? (
-                  <>
-                    <img src={photos[index]} alt={`Profile ${index + 1}`} />
-                    <button className="remove-photo-btn" onClick={() => removeImage(index)}>X</button>
-                  </>
-                ) : (
-                  <>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(event) => handleImageUpload(event, index)}
-                      style={{ display: 'none' }}
-                      id={`file-upload-${index}`}
-                    />
-                    <label htmlFor={`file-upload-${index}`} className="add-photo-btn">+</label>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-          <button className="save-btn" onClick={() => setIsEditing(false)}>Save</button>
-        </div>
-      ) : (
-        <div className="slider-container">
-          <div className="slider">
-            {photos.length > 0 ? (
-              <>
-                <img src={photos[currentIndex]} alt={`Slide ${currentIndex + 1}`} />
-                <button className="slider-arrow left" onClick={handlePrev}>‹</button>
-                <button className="slider-arrow right" onClick={handleNext}>›</button>
-              </>
-            ) : (
-              <p>No photos available</p>
-            )}
-          </div>
-          <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit Photos</button>
-        </div>
-      )}
+      <ProfileSlider images={images} user={user} />
     </div>
   );
 };
 
-export default Profile;
+export default ProfilePage;
