@@ -187,10 +187,10 @@
     border-radius: 30px;
     cursor: pointer;
     border: none;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken(#ff4b4b, 10%);
+      background-color: #ff4b4b;
     }
   }
 }

@@ -1,7 +1,17 @@
 import React from "react";
 import "../assets/styles/profileSidebar.scss";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSidebar: React.FC = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userToken"); // Ako koristiš token za autentifikaciju
+    navigate("/"); // Preusmeravanje na login stranicu
+  };
+  
+
   return (
     <div className="profile-sidebar">
       <h2>O meni</h2>
@@ -24,8 +34,16 @@ const ProfileSidebar: React.FC = () => {
 
       <h2>Tvoja visina</h2>
       <input type="number" placeholder="Unesi visinu u cm" />
+
+      <button className="logout-button" onClick={handleLogout}>
+  Logout
+</button>
     </div>
+
+    
   );
+
+
 };
 
 export default ProfileSidebar;

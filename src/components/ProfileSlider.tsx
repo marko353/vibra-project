@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/styles/profileSlider.scss";
 
@@ -10,9 +10,10 @@ interface User {
 interface ProfileSliderProps {
   images: string[];
   user: User | null;
+  selectedUser?: User | null; // Dodato: prop za selektovanog korisnika
 }
 
-const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user }) => {
+const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -24,9 +25,14 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user }) => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
+  // Funkcija za izračunavanje godina
   const calculateAge = (birthDate: string): number => {
     if (!birthDate) return 0;
+
     const birth = new Date(birthDate);
+    console.log("Birthdate:", birthDate);  // Log datuma za proveru
+    console.log("Birth date object:", birth);  // Log objekta datuma
+
     const today = new Date();
     let age = today.getFullYear() - birth.getFullYear();
     const monthDiff = today.getMonth() - birth.getMonth();
@@ -36,17 +42,25 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user }) => {
     return age;
   };
 
+  const userToDisplay = selectedUser || user; // Koristi selektovanog korisnika, ako postoji
+
+  useEffect(() => {
+    if (userToDisplay?.birthDate) {
+      console.log("User birth date:", userToDisplay.birthDate);  // Log za korisnički datum rođenja
+    }
+  }, [userToDisplay]);
+
   return (
     <div className="profile-slider">
       <div className="slider-container">
         {/* Prikaz imena i godina unutar slidera */}
-        {user && (
+        {userToDisplay && (
           <div className="user-info">
-            <h1>{user.fullName}</h1>
-            <p>{calculateAge(user.birthDate)}</p>
+            <h1>{userToDisplay.fullName}</h1>
+            <p>{calculateAge(userToDisplay.birthDate)}</p> {/* Prikazivanje godina */}
           </div>
         )}
-        
+
         {/* Slika */}
         {images && images.length > 0 ? (
           <div className="image-container">
@@ -66,12 +80,15 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user }) => {
           <div className="no-image">No images available</div>
         )}
       </div>
-      
-      <div className="edit-button-container">
-        <button className="edit-button" onClick={() => navigate('/profilePhotos')}>
-          Edit Photos
-        </button>
-      </div>
+
+      {/* Sakrij dugme ako je selektovan korisnik za chat */}
+      {!selectedUser && (
+        <div className="edit-button-container">
+          <button className="edit-button" onClick={() => navigate('/profilePhotos')}>
+            Edit Photos
+          </button>
+        </div>
+      )}
     </div>
   );
 };
