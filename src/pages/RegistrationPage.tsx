@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import '../assets/styles/registration.scss';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,9 +36,10 @@ const schema = z
 
 interface RegistrationProps {
   onClose: () => void;
+  isOpen: boolean;
 }
 
-const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
+const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -46,12 +47,26 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset, 
   } = useForm({
     resolver: zodResolver(schema),
   });
 
+  // Resetovanje forme svaki put kad je modal otvoren
+  useEffect(() => {
+    if (isOpen) {
+      reset({
+        email: '',
+        password: '',
+        fullName: '',
+        birthDate: '',
+        confirmPassword: '',
+      });
+    }
+  }, [isOpen, reset]);
+
   const onSubmit = async (data: any) => {
-    console.log('Submitted data:', data); // Proveri šta se šalje
+    console.log('Submitted data:', data); 
     try {
       const response = await axios.post("http://localhost:5000/api/auth/register", {
         name: data.fullName,
@@ -59,7 +74,7 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
         email: data.email,
         password: data.password,
         fullName: data.fullName,
-        birthDate: data.birthDate, // Ovdje šalješ već u formatu YYYY-MM-DD
+        birthDate: data.birthDate,
       });
 
       console.log(response.data);
@@ -86,11 +101,13 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
   };
 
   React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="register-container" ref={modalRef}>
@@ -102,7 +119,10 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
         />
         <h2>Create an Account</h2>
         <p>Join us to get started</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          key={isOpen ? 'open' : 'closed'}  
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="form-group">
             <input
               type="text"
@@ -115,7 +135,7 @@ const Registration: React.FC<RegistrationProps> = ({ onClose }) => {
           </div>
           <div className="form-group">
             <input
-              type="date"  // Koristi tip "date"
+              type="date"
               placeholder="Birth Date"
               {...register("birthDate")}
               className={errors.birthDate ? 'error-input' : ''}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -27,40 +27,40 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
   });
 
   const onSubmit = async (data: FormData) => {
-    console.log("onSubmit called with data:", data); // Proveri da li je funkcija pozvana
+    console.log("onSubmit called with data:", data);
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email: data.email,
         password: data.password,
       });
   
-      // Čuvamo token u localStorage
       localStorage.setItem('token', response.data.token);
   
-      // Dodaj log ovde da proveriš token
       const token = localStorage.getItem('token');
       console.log("Token saved:", token);
   
-      // Nakon uspešnog login-a, preusmeri korisnika na stranicu profila
-      navigate('/profile'); // Preusmeravanje na profil stranici
-  
+      navigate('/profile');
     } catch (error) {
       console.error("Login error:", error);
       setError('Invalid email or password');
     }
   };
-  
 
   const handleClickOutside = (e: MouseEvent) => {
+    // Proveravamo da li je kliknut deo van modalnog sadržaja
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      console.log('Clicked outside');
-      onClose(); // Zatvori modal kad klikneš van njega
+      onClose();
     }
   };
 
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+  useEffect(() => {
+    // Dodajemo listener za detekciju klika van modala
+    if (modalRef.current) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
     return () => {
+      // Očistimo event listener kada komponenta bude uklonjena
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);

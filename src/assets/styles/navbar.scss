@@ -1,3 +1,6 @@
+@use "sass:color";
+
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -188,7 +191,8 @@
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: darken(#ff4b4b, 10%);
+          background-color: color.adjust(#ff4b4b, $lightness: -10%);
+
         }
       }
 
