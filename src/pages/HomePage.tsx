@@ -3,7 +3,7 @@ import '../assets/styles/home.scss';
 import Navbar from '../components/Navbar';
 import Modal from '../components/Modal';
 import Login from '../pages/LoginPage';
-import Registration from '../pages/RegistrationPage';
+import RegistrationPage from '../pages/RegistrationPage';
 
 const Home: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -33,12 +33,12 @@ const Home: React.FC = () => {
 
       {/* Login Modal */}
       <Modal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)}>
-        <Login onClose={() => setShowLoginModal(false)} />
-      </Modal>
+  <Login onClose={() => setShowLoginModal(false)}  />
+</Modal>
 
       {/* Registration Modal */}
       <Modal isOpen={showRegistrationModal} onClose={() => setShowRegistrationModal(false)}>
-        <Registration onClose={() => setShowRegistrationModal(false)} />
+        <RegistrationPage onClose={() => setShowRegistrationModal(false)} isOpen={false} />
       </Modal>
     </div>
   );

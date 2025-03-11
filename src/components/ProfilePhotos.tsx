@@ -141,7 +141,7 @@ const ProfilePhotos: React.FC = () => {
           className="preview-button"
           onClick={handlePreview}
         >
-          Preview
+          Back
         </button>
         <button
           className="save-button"

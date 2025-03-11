@@ -5,7 +5,8 @@ import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/styles/login.scss';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface LoginProps {
   onClose: () => void;
 }
@@ -39,12 +40,16 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
       const token = localStorage.getItem('token');
       console.log("Token saved:", token);
   
+      // Prikazivanje Toastify poruke
+      toast.success("You have successfully logged in!");
+  
       navigate('/profile');
     } catch (error) {
       console.error("Login error:", error);
       setError('Invalid email or password');
     }
   };
+  
 
   const handleClickOutside = (e: MouseEvent) => {
     // Proveravamo da li je kliknut deo van modalnog sadržaja
@@ -67,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onClose }) => {
 
   return (
     <div className="login-container" ref={modalRef}>
-      <div className="login-box">
+      <div className="login-box" onClick={(e) => e.stopPropagation()}>
         <img src="./src/assets/images/Page0.png" alt="Logo" className="form-logo" />
         <h2>Welcome !</h2>
         <p>Sign in to continue</p>

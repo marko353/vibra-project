@@ -1,99 +1,120 @@
+// General container for the login modal
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  animation: gradientAnimation 10s ease infinite;
-  background-size: 200% 200%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  padding: 0 20px; // Added some padding for responsiveness
+  pointer-events: none; // Disables interaction with the background
 
+  // Centering the content (login box)
   .login-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2.5rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    background: #ffffff; // Light background for the login box
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 400px;
     text-align: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto; // Ensures the login box is interactive
 
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    // Logo styling
+    .form-logo {
+      max-width: 160px; // Increased logo size
+      margin-bottom: 1rem;
     }
 
     h2 {
-      margin-bottom: 0.5rem;
+      font-size: 2rem; // Increased font size for better visibility
       color: #333;
-      font-size: 2rem;
+      margin-bottom: 1.5rem; // Added more margin for spacing
     }
 
     p {
-      margin-bottom: 2rem;
-      color: #666;
+      color: #777;
+      margin-bottom: 2rem; // Increased margin for better spacing
+      font-size: 1rem;
+    }
+
+    // Form layout with gap
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
-      text-align: left;
-
-      input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-        &:focus {
-          border-color: #ff6f61; // Matching focus color
-          box-shadow: 0 0 8px rgba(255, 111, 97, 0.5);
-          outline: none;
-        }
-
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    
+    .form-group input {
+      width: 100%; /* Postavi širinu na 100% da se prilagodi širinama roditeljskog elementa */
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #ff6f61; /* Promeni boju border-a kad je input fokusiran */
+    }
+    
         &::placeholder {
-          color: #999;
+          color: #aaa;
         }
+  }
+
+      .error-message {
+        color: #ff6f61;
+        font-size: 0.9rem;
+        margin-top: 5px;
       }
     }
 
+    // Button styling
     .login-button {
-      background: #ff6f61; // Matching button color
-      color: white;
-      border: none;
-      padding: 12px;
       width: 100%;
+      padding: 14px;
+      background-color: #ff6f61;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
       border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
 
       &:hover {
-        background: #ff4b4b; // Darker shade on hover
-        transform: translateY(-2px);
+        background-color: #ff4b4b;
+        transform: translateY(-3px);
       }
 
       &:active {
         transform: translateY(0);
       }
     }
-    .form-logo {
-      max-width: 200px; // Prilagodite veličinu
-      margin: 0 auto 0px; // Centrirajte i dodajte razmak ispod
-      display: block;
-    
-  
-    
-    }
 
+    // Register link for redirection to registration page
     .register-link {
-      margin-top: 1.5rem;
+      margin-top: 1.5rem; // Increased margin
+      font-size: 1rem; // Increased font size for better readability
       color: #666;
-      font-size: 0.9rem;
 
       a {
-        color: #ff6f61; // Matching link color
+        color: #ff6f61;
         text-decoration: none;
         font-weight: bold;
 
@@ -102,107 +123,10 @@
         }
       }
     }
-  }
-}
+  
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
 
-.login-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-
-  .form-logo {
-    width: 100px;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-    color: #333;
-  }
-
-  p {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 1.5rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      width: 100%;
-
-      input {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ccc;
-        border-radius: 30px;
-        font-size: 1rem;
-        outline: none;
-        transition: border 0.3s ease;
-
-        &:focus {
-          border-color: #ff4b4b;
-        }
-      }
-
-      .error-message {
-        color: #ff4b4b;
-        font-size: 0.9rem;
-        margin-top: 5px;
-      }
-    }
-  }
-
-  .login-button {
-    width: 100%;
-    background-color: #ff4b4b;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 12px;
-    border-radius: 30px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #ff4b4b;
-    }
-  }
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .login-box {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-}
-
+// Keyframes for subtle background gradient animation (optional)
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -215,19 +139,41 @@
   }
 }
 
-@media (max-width: 768px) {
+// Mobile responsiveness
+@media (max-width: 480px) {
   .login-container {
     padding: 0 1rem;
+  }
+
+  .login-box {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.6rem; // Reduced size for small screens
+  }
+
+  .form-group input {
+    font-size: 0.9rem;
+  }
+
+  .login-button {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .register-link {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 0 1.5rem;
   }
 
   .login-box {
     padding: 2rem;
   }
 }
-
-@media (max-width: 480px) {
-  .login-box {
-    padding: 1.5rem;
-  }
-}
-

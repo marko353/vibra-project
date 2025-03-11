@@ -15,7 +15,7 @@ interface User {
 const ProfilePage: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [images, setImages] = useState<string[]>([]);
-  const [sliderImages, setSliderImages] = useState<string[]>([]); 
+  const [sliderImages, setSliderImages] = useState<string[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const ProfilePage: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setImages(response.data.profilePictures || []);
-        setSliderImages(response.data.profilePictures || []); 
+        setSliderImages(response.data.profilePictures || []);
       } catch (error) {
         console.error("Greška pri preuzimanju slika:", error);
       }
@@ -75,19 +75,19 @@ const ProfilePage: React.FC = () => {
     if (selectedUser) {
       setSliderImages(selectedUser.profilePictures || []);
     } else {
-      setSliderImages(images); 
+      setSliderImages(images);
     }
   }, [selectedUser, images]);
 
   const handleSelectUser = (user: User) => {
     setSelectedUser(user);
-    setSliderImages(user.profilePictures || []); 
+    setSliderImages(user.profilePictures || []);
     setIsChatVisible(true);
   };
 
   const handleCloseChat = () => {
     setSelectedUser(null);
-    setSliderImages(images); 
+    setSliderImages(images);
     setIsChatVisible(false);
   };
 
@@ -116,10 +116,10 @@ const ProfilePage: React.FC = () => {
         />
       )}
 
-      <ProfileSlider 
-        images={sliderImages} 
-        user={selectedUser || user} 
-        selectedUser={selectedUser} 
+      <ProfileSlider
+        images={sliderImages}
+        user={selectedUser || user}
+        selectedUser={selectedUser}
       />
     </div>
   );

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { IoChevronDown } from "react-icons/io5"; 
 import "../assets/styles/chatSidebar.scss";
+import { useNavigate } from "react-router-dom";
+
 
 interface User {
   _id: string;
@@ -13,19 +16,22 @@ interface ChatSidebarProps {
   currentUser: User;
   chats: User[];
   onUserSelect: (user: User) => void;
+  onLogout: () => void;
 }
 
-const socket = io("http://localhost:5000"); // Povezivanje na backend Socket.IO
+const socket = io("http://localhost:5000");
 
-const ChatSidebar: React.FC<ChatSidebarProps> = ({ currentUser, chats, onUserSelect }) => {
+const ChatSidebar: React.FC<ChatSidebarProps> = ({ currentUser, chats, onUserSelect, onLogout }) => {
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const [unreadMessages, setUnreadMessages] = useState<{ [key: string]: number }>({});
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     socket.emit("join", currentUser._id);
 
     socket.on("updateOnlineUsers", (onlineUsersList: string[]) => {
-      // Filtriraj trenutnog korisnika
       setOnlineUsers(onlineUsersList.filter(userId => userId !== currentUser._id));
     });
 
@@ -45,25 +51,38 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({ currentUser, chats, onUserSel
 
   const handleUserSelect = (user: User) => {
     onUserSelect(user);
-    setUnreadMessages((prev) => ({ ...prev, [user._id]: 0 })); // Reset brojača poruka
+    setUnreadMessages((prev) => ({ ...prev, [user._id]: 0 }));
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("userToken"); // Ako koristiš token za autentifikaciju
+    navigate("/"); // Preusmeravanje na login stranicu
   };
 
   return (
     <div className="chat-sidebar">
-      <div className="current-user">
+      {/* Current User - Klikom se otvara meni */}
+      <div className="current-user" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <img
           src={currentUser.profilePictures?.[0] || "https://path/to/default-avatar.jpg"}
           alt={currentUser.fullName}
           className="avatar"
         />
         <span className="user-name">{currentUser.fullName}</span>
+        <IoChevronDown className={`dropdown-icon ${isMenuOpen ? "open" : ""}`} />
+        
+        {/* Dropdown meni za logout */}
+        {isMenuOpen && (
+          <div className="dropdown-menu">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
       </div>
 
-      <h2>Chat</h2>
+      <h2>Chat list</h2>
 
       <ul className="chat-list">
         {chats
-          .filter(chat => chat._id !== currentUser._id) // Ne prikazuj trenutnog korisnika u listi chatova
+          .filter(chat => chat._id !== currentUser._id)
           .map((chat) => (
             <li key={chat._id} className="chat-item" onClick={() => handleUserSelect(chat)}>
               <div className="chat-avatar">
@@ -73,14 +92,15 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({ currentUser, chats, onUserSel
                   className="avatar"
                 />
                 {onlineUsers.includes(chat._id) && <span className="online-dot"></span>}
+                {unreadMessages[chat._id] > 0 && (
+                  <span className="unread-badge">{unreadMessages[chat._id]}</span>
+                )}
               </div>
               <div className="chat-info">
                 <span className="chat-name">{chat.fullName}</span>
-                {unreadMessages[chat._id] ? (
-                  <span className="unread-badge">{unreadMessages[chat._id]}</span>
-                ) : (
-                  <span className="chat-message">Klikni za chat</span>
-                )}
+                <span className="last-message">
+                  {unreadMessages[chat._id] ? "New message" : "Klikni za chat"}
+                </span>
               </div>
             </li>
           ))}
@@ -88,6 +108,5 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({ currentUser, chats, onUserSel
     </div>
   );
 };
-
 
 export default ChatSidebar;
