@@ -9,20 +9,23 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      console.log('Clicked outside'); // Debugging
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        console.log('Closing modal'); // Debugging
-        onClose();
-      }
-    };
+  const handleClickOutside = (e: MouseEvent) => {
+    console.log('Clicked outside modal'); // Debugging
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      console.log('Closing modal'); // Debugging
+      onClose();
+    }
+  };
 
+  useEffect(() => {
+    console.log('useEffect triggered, isOpen:', isOpen); // Debugging
     if (isOpen) {
+      console.log('Adding event listener'); // Debugging
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
+      console.log('Removing event listener'); // Debugging
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
@@ -36,6 +39,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       </div>
     </div>
   );
-};
+};;
 
 export default Modal;

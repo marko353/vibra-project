@@ -25,7 +25,7 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUse
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  // Funkcija za izračunavanje godina
+  
   const calculateAge = (birthDate: string): number => {
     if (!birthDate) return 0;
 
