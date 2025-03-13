@@ -5,14 +5,14 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 ---
 
 ## 📋 Table of Contents
-1. [Technologies](#-technologies)
-2. [Installation and Setup](#-installation-and-setup)
-3. [Authentication and Security](#-authentication-and-security)
-4. [Real-Time Chat](#-real-time-chat)
-5. [Image Management](#-image-management)
-6. [Project Structure](#-project-structure)
-7. [Screenshots](#-screenshots)
-8. [Contact](#-contact)
+1. [Technologies](#technologies)
+2. [Installation and Setup](#installation-and-setup)
+3. [Authentication and Security](#authentication-and-security)
+4. [Real-Time Chat](#real-time-chat)
+5. [Image Management](#image-management)
+6. [Project Structure](#project-structure)
+7. [Screenshots](#screenshots)
+8. [Contact](#contact)
    
 ---
 
