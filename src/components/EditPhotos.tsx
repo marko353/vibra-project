@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "../assets/styles/profilePhotos.scss";
-import ProfileSidebar from "../components/ProfileSidebar"
+import "../assets/styles/editPhotos.scss";
+import ProfileSidebar from "./ProfileSidebar"
+import FilterSettings from './FilterSettings';
 
-const ProfilePhotos: React.FC = () => {
+
+
+
+const EditPhotos: React.FC = ({}) => {
+
   const [images, setImages] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
@@ -79,14 +84,14 @@ const ProfilePhotos: React.FC = () => {
       // Ponovo učitaj slike iz baze da osvežimo prikaz
       await fetchImages();
 
-      navigate('/profile');  // Preusmeri korisnika na stranicu profila
+      navigate('/chatDashboard');  // Preusmeri korisnika na stranicu profila
     } catch (error) {
       console.error("Error saving images:", error);
     }
   };
 
   const handlePreview = () => {
-    navigate('/profile');
+    navigate('/chatDashboard');
   };
 
   const handleClickUpload = (index: number) => {
@@ -135,6 +140,7 @@ const ProfilePhotos: React.FC = () => {
           </div>
         ))}
       </div>
+      
 
       <div className="button-container">
         <button
@@ -152,8 +158,10 @@ const ProfilePhotos: React.FC = () => {
         </button>
       </div>
     </div>
+    <FilterSettings />
     </div>
+    
   );
 };
 
-export default ProfilePhotos;
+export default EditPhotos;

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../assets/styles/profilePage.scss";
-import ProfileSlider from "../components/ProfileSlider";
-import ChatSidebar from "../components/ChatSidebar";
+import "../assets/styles/chatDashboard.scss";
+import Slider from "../components/Slider";
 import Chat from "../components/Chat";
+import ChatList from "../components/ChatList";
+
+
+
 
 interface User {
   _id: string;
@@ -12,7 +15,8 @@ interface User {
   profilePictures?: string[];
 }
 
-const ProfilePage: React.FC = () => {
+
+const ChatDashboard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [sliderImages, setSliderImages] = useState<string[]>([]);
@@ -97,7 +101,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile-page">
-      <ChatSidebar
+      <ChatList
         currentUser={{
           _id: user._id,
           fullName: user.fullName,
@@ -116,13 +120,14 @@ const ProfilePage: React.FC = () => {
         />
       )}
 
-      <ProfileSlider
+      <Slider
         images={sliderImages}
         user={selectedUser || user}
         selectedUser={selectedUser}
       />
     </div>
+   
   );
 };
 
-export default ProfilePage;
+export default ChatDashboard;

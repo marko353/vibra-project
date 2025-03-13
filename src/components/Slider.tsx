@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../assets/styles/profileSlider.scss";
+import "../assets/styles/slider.scss";
 
 interface User {
   fullName: string;
@@ -8,12 +8,12 @@ interface User {
 }
 
 interface ProfileSliderProps {
-  images: string[];
+  images: string[]; 
   user: User | null;
   selectedUser?: User | null; // Dodato: prop za selektovanog korisnika
 }
 
-const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) => {
+const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -30,8 +30,7 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUse
     if (!birthDate) return 0;
 
     const birth = new Date(birthDate);
-    console.log("Birthdate:", birthDate);  // Log datuma za proveru
-    console.log("Birth date object:", birth);  // Log objekta datuma
+   
 
     const today = new Date();
     let age = today.getFullYear() - birth.getFullYear();
@@ -84,7 +83,7 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUse
       {/* Sakrij dugme ako je selektovan korisnik za chat */}
       {!selectedUser && (
         <div className="edit-button-container">
-          <button className="edit-button" onClick={() => navigate('/profilePhotos')}>
+          <button className="edit-button" onClick={() => navigate('/editPhotos')}>
             Edit Photos
           </button>
         </div>
@@ -93,4 +92,4 @@ const ProfileSlider: React.FC<ProfileSliderProps> = ({ images, user, selectedUse
   );
 };
 
-export default ProfileSlider;
+export default Slider;

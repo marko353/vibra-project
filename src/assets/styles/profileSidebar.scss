@@ -100,5 +100,103 @@
       background-color: #d63030;
     }
   }
+  .profile-sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  
+    textarea {
+      width: 100%;
+      height: 80px;
+      resize: none;
+      padding: 5px;
+    }
+  
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  
+    .interest-tag-container {
+      position: relative;
+      display: inline-block;
+  
+      .interest-tag {
+        padding: 5px 10px;
+        border: none;
+        background: #ddd;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+  
+        &.active {
+          background: #d63030;
+          color: white;
+          border-color: #d63030;
+        }
+  
+        &:hover {
+          background: #bbb;
+        }
+      }
+  
+      .remove-tag-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0;
+        margin: 0;
+        transition: all 0.3s ease;
+  
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  
+    select,
+    input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  
+    .logout-button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #d63030;
+      }
+    }
+  }
+  
   
 }
