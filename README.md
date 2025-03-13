@@ -106,7 +106,7 @@ vibra/
 🖼️ **Screenshots**
 
 - **Home Page**  
-  ![Home Page](path/to/home-page-screenshot.png)  
+  ![Home Page]([path/to/home-page-screenshot.png](https://github.com/marko353/vibra-project/tree/7e1df8b92b2e02b715a92d7109a8bfad193551d0/screenshots))  
   Description: The home page with basic information about the application.
 
 - **Registration**  
