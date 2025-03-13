@@ -35,6 +35,7 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 - **Socket.io** - Real-time communication for chat functionality.
 
 ---
+
 ## 🖼️ Screenshots
 
 - **Home Page**  
@@ -74,61 +75,3 @@ npx nodemon server.js
 cd frontend
 npm install
 npm run dev
-
-## 🔒 Authentication and Security
-
-- **Registration and Login**: Users can register and log in using their email and password.
-- **JWT Token**: Tokens are stored in httpOnly cookies for enhanced security.
-- **Authorization**: Protected routes are handled using `authMiddleware`.
-
----
-
-## 💬 Real-Time Chat
-
-- **Socket.io**: Enables real-time communication between users.
-- **Message Storage**: All messages are stored in the MongoDB database.
-- **Chat Interface**: Clicking on another user opens a chat window.
-
----
-
-## 📸 Image Management
-
-- **Adding Images**: Users can upload images to their profile.
-- **Cloud Storage**: Images are stored on a cloud service, and URLs are saved in the database.
-- **Image Display**: The profile page displays up to 9 images per user.
-
-##  Project Structure
-
-vibra/
- ├── backend/
- │   ├── controllers/    # Logic for handling requests
- │   ├── models/         # MongoDB schemas
- │   ├── routes/         # API routes
- │   ├── middleware/     # Middleware functions (e.g., authentication)
- │   ├── config/         # Configuration (e.g., database)
- │   ├── server.js       # Backend entry point
- │   ├── .env            # Environment variables
- │
- ├── frontend/
- │   ├── src/
- │   │   ├── assets/     # Static resources (images, fonts)
- │   │   ├── components/ # Reusable components
- │   │   ├── pages/      # Application pages
- │   │   ├── styles/     # SCSS files
- │   │   ├── App.tsx     # Main React component
- │   │   ├── main.tsx    # Frontend entry point
- │   ├── vite.config.ts  # Vite configuration
- │   ├── tsconfig.json   # TypeScript configuration
- │
- ├── README.md           # Documentation
- ├── package.json        # Dependencies and scripts
- ├── .gitignore          # Files to ignore in Git
-
- 
-  Description: Real-time chat window for user communication.
-
-📩 **Contact**  
-For questions, suggestions, or collaborations, feel free to contact us at [markostojanovic353@gmail.com].
-
-
-
