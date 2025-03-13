@@ -13,7 +13,7 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 6. [Project Structure](#-project-structure)
 7. [Screenshots](#-screenshots)
 8. [Contact](#-contact)
-
+   
 ---
 
 ## 🛠️ Technologies
@@ -35,6 +35,27 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 - **Socket.io** - Real-time communication for chat functionality.
 
 ---
+## 🖼️ Screenshots
+
+- **Home Page**  
+  ![Home Page](https://github.com/marko353/vibra-project/blob/main/homePage.png?raw=true)  
+  Description: The home page with basic information about the application.
+
+- **Registration**  
+  ![Registration](screenshots/registration.png)  
+  Description: Form for new user registration.
+
+- **Login**  
+  ![Login](screenshots/login.png)  
+  Description: Form for existing user login.
+
+- **User Profile**  
+  ![Profile](screenshots/user-profile.png)  
+  Description: User profile page with images and information.
+
+- **Real-Time Chat**  
+  ![Chat Page](screenshots/chatPage.png)  
+  Description: Real-time chat window for user communication.
 
 ## 🚀 Installation and Setup
 
@@ -103,32 +124,7 @@ vibra/
  ├── package.json        # Dependencies and scripts
  ├── .gitignore          # Files to ignore in Git
 
-🖼️ **Screenshots**
-
-- **Home Page**  
-  ![Home Page](https://github.com/marko353/vibra-project/blob/main/homePage.png?raw=true)  
-  Description: The home page with basic information about the application.
-
-- **Registration**  
-  ![Registration](screenshots/registration.png)  
-  Description: Form for new user registration.
-
-- **Login**  
- ![image](https://github.com/user-attachments/assets/883b444d-bfd8-4d20-ad7d-4e814e943678)
-
-)  
-  Description: Form for existing user login.
-
-- **User Profile**  
-  ![Profile](path/to/user-profile-screenshot.png)  
-  Description: User profile page with images and information.
-
-- **Real-Time Chat**  
-![Chat Page](screenshots/chatPage.png)
-
-
-
-)  
+ 
   Description: Real-time chat window for user communication.
 
 📩 **Contact**  
