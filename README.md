@@ -15,8 +15,6 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 8. [Contact](#-contact)
 
 ---
-https://github.com/marko353/vibra-project/blob/main/screenshots/chatPage.png?raw=true
-
 
 ## 🛠️ Technologies
 
