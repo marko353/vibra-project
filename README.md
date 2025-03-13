@@ -110,7 +110,7 @@ vibra/
   Description: The home page with basic information about the application.
 
 - **Registration**  
-  ![Registration](path/to/registration-screenshot.png)  
+  ![Registration](screenshots/registration.png)  
   Description: Form for new user registration.
 
 - **Login**  
@@ -124,7 +124,8 @@ vibra/
   Description: User profile page with images and information.
 
 - **Real-Time Chat**  
-![Chat Page](https://raw.githubusercontent.com/marko353/vibra-project/main/screenshots/chatPage.png)
+![Chat Page](screenshots/chatPage.png)
+
 
 
 )  
