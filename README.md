@@ -50,7 +50,7 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
   Description: Form for existing user login.
 
 - **User Profile**  
-  ![Profile](screenshots/profile.png)  
+  ![Profile](screenshots/profilePage.png)  
   Description: User profile page with images and information.
 
 - **Real-Time Chat**  
