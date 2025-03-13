@@ -38,7 +38,7 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 ## 🖼️ Screenshots
 
 - **Home Page**  
-  ![Home Page](https://github.com/marko353/vibra-project/blob/main/homePage.png?raw=true)  
+  ![Home Page](screenshots/homePage.png)  
   Description: The home page with basic information about the application.
 
 - **Registration**  
