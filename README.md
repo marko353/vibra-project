@@ -12,8 +12,7 @@ VibrA is a modern dating application designed to provide a fast, secure, and int
 5. [Image Management](#-image-management)
 6. [Project Structure](#-project-structure)
 7. [Screenshots](#-screenshots)
-8. [TODO List](#-todo-list)
-9. [Contact](#-contact)
+8. [Contact](#-contact)
 
 ---
 
