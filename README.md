@@ -122,7 +122,7 @@ vibra/
   Description: User profile page with images and information.
 
 - **Real-Time Chat**  
-  ![Chat](https://github.com/marko353/vibra-project/blob/main/screenshots/chatPage.png)  
+  ![imagealt](https://github.com/marko353/vibra-project/blob/main/screenshots/chatPage.png)  
   Description: Real-time chat window for user communication.
 
 📩 **Contact**  
