@@ -121,34 +121,34 @@ vibra/
  ├── README.md           # Project documentation
  ├── package.json        # Project dependencies and scripts
  ├── .gitignore          # Files and folders to ignore in Git
-🖼️ Screenshots
-Home Page
-Home Page
-Description: The home page provides an overview of the application and its features.
+## 🖼️ Screenshots
 
-Registration
-Registration
-Description: The registration page allows new users to create an account.
+### Home Page
+![Home Page](screenshots/homePage.png)  
+*Description: The home page provides an overview of the application and its features.*
 
-Login
-Login
-Description: The login page enables existing users to access their accounts.
+### Registration
+![Registration](screenshots/registration.png)  
+*Description: The registration page allows new users to create an account.*
 
-User Profile
-Profile
-Description: The user profile page displays personal information and uploaded images.
+### Login
+![Login](screenshots/login.png)  
+*Description: The login page enables existing users to access their accounts.*
 
-Real-Time Chat
-Chat Page
-Description: The chat page allows users to communicate in real-time.
+### User Profile
+![Profile](screenshots/profilePage.png)  
+*Description: The user profile page displays personal information and uploaded images.*
 
-📩 Contact
+### Real-Time Chat
+![Chat Page](screenshots/chatPage.png)  
+*Description: The chat page allows users to communicate in real-time.*
+
+---
+
+## 📩 Contact
+
 For questions, suggestions, or collaboration opportunities, feel free to reach out:
 
-Email: your-email@example.com
-
-GitHub: yourusername
-
-LinkedIn: 
-
-🎉 Thank you for using VibrA! We hope you enjoy the experience.
+- **Email:** [your-email@example.com](mailto:your-email@example.com)
+- **GitHub:** [yourusername](https://github.com/yourusername)
+- **LinkedIn:** [Your Name](https://linkedin.com/in/yourprofile)
