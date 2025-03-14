@@ -47,46 +47,6 @@ The application uses:
 ## 🚀 Installation and Setup  
 
 ### 1️⃣ Clone the repository  
-```bash
-git clone https://github.com/yourusername/vibra.git  
-cd vibra
-
-2️⃣ Set up the backend
-bash
-Copy
-Edit
-cd backend  
-npm install  
-npx nodemon server.js  
-3️⃣ Set up the frontend
-bash
-Copy
-Edit
-cd frontend  
-npm install  
-npm run dev 
-🔒 Authentication & Security
-✅ User Registration & Login – Users create an account with email and password
-✅ JWT Token – Secure authentication via HTTP-only cookies
-✅ Protected Routes – Only authenticated users can access certain features
-
-💬 Real-Time Chat
-💡 Powered by Socket.io, enabling real-time conversations between users.
-
-🔹 Instant message delivery
-🔹 Message history stored in MongoDB
-🔹 Simple and intuitive chat interface
-
-yaml
-Copy
-Edit
-
----
-
-### **PART 3: Images, Structure, Screenshots, and Contact**  
-
-```md
----
 
 ## 📸 Image Management  
 🖼️ Users can **upload profile images**, stored on cloud services like **Cloudinary** or **AWS S3**.  
@@ -95,13 +55,31 @@ Edit
 🔹 Displayed in a **responsive grid layout**  
 
 ---
-
-## 📂 Project Structure  
-vibra/ ├── backend/ │ ├── controllers/ # API request logic │ ├── models/ # MongoDB schemas and models │ ├── routes/ # API endpoints │ ├── middleware/ # Authentication middleware │ ├── config/ # Configuration files │ ├── server.js # Backend entry point │ ├── frontend/ │ ├── src/ │ │ ├── assets/ # Static resources (images, fonts) │ │ ├── components/ # Reusable UI components │ │ ├── pages/ # App pages (Home, Profile, Chat) │ │ ├── styles/ # SCSS files │ │ ├── App.tsx # Main React component │ │ ├── main.tsx # Frontend entry point │ ├── vite.config.ts # Vite configuration │ ├── tsconfig.json # TypeScript configuration │ ├── README.md # Project documentation ├── package.json # Dependencies and scripts ├── .gitignore # Files to be ignored by Git
-
-yaml
-Copy
-Edit
+## Structure
+vibra/
+ ├── backend/
+ │   ├── controllers/    # Logic for handling API requests
+ │   ├── models/         # MongoDB schemas and data models
+ │   ├── routes/         # API endpoints and routing logic
+ │   ├── middleware/     # Custom middleware (e.g., authentication)
+ │   ├── config/         # Configuration files (e.g., database connection)
+ │   ├── server.js       # Entry point for the backend server
+ │   ├── .env            # Environment variables (e.g., API keys, secrets)
+ │
+ ├── frontend/
+ │   ├── src/
+ │   │   ├── assets/     # Static resources (e.g., images, fonts)
+ │   │   ├── components/ # Reusable UI components
+ │   │   ├── pages/      # Application pages (e.g., Home, Profile, Chat)
+ │   │   ├── styles/     # SCSS files for styling
+ │   │   ├── App.tsx     # Main React component
+ │   │   ├── main.tsx    # Entry point for the frontend
+ │   ├── vite.config.ts  # Vite configuration file
+ │   ├── tsconfig.json   # TypeScript configuration file
+ │
+ ├── README.md           # Project documentation
+ ├── package.json        # Project dependencies and scripts
+ ├── .gitignore          # Files and folders to ignore in Git
 
 ---
 
@@ -132,6 +110,6 @@ Edit
 ## 📩 Contact  
 💡 For questions, suggestions, or collaboration opportunities, feel free to reach out:  
 
-📧 **Email:** [your-email@example.com](mailto:your-email@example.com)  
-💻 **GitHub:** [yourusername](https://github.com/yourusername)  
-🔗 **LinkedIn:** [Your Name](https://linkedin.com/in/yourprofile)  
+📧 **Email:** [your-email@example.com](markostojanovic353.com)  
+💻 **GitHub:** [yourusername](https://github.com/marko353)  
+🔗 **LinkedIn:** [Your Name](https://www.linkedin.com/in/marko-stojanovic-87992b250/)  
