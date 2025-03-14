@@ -63,7 +63,7 @@ Follow these steps to set up and run the project locally.
 ---
 ## Structure
 
-### 📍 Home Page  
+### 📍  
 ![Structure](/project.png)  
 
 
