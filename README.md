@@ -63,30 +63,9 @@ Follow these steps to set up and run the project locally.
 ---
 ## Structure
 
- vibra/
-├── backend/
-│   ├── controllers/      # Logic for handling API requests
-│   ├── models/           # MongoDB schemas and data models
-│   ├── routes/           # API endpoints and routing logic
-│   ├── middleware/       # Custom middleware (e.g., authentication)
-│   ├── config/           # Configuration files (e.g., database connection)
-│   ├── server.js         # Entry point for the backend server
-│   ├── .env              # Environment variables (e.g., API keys, secrets)
-│
-├── frontend/
-│   ├── src/
-│   │   ├── assets/       # Static resources (e.g., images, fonts)
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Application pages (e.g., Home, Profile, Chat)
-│   │   ├── styles/       # SCSS files for styling
-│   │   ├── App.tsx       # Main React component
-│   │   ├── main.tsx      # Entry point for the frontend
-│   ├── vite.config.ts    # Vite configuration file
-│   ├── tsconfig.json     # TypeScript configuration file
-│
-├── README.md             # Project documentation
-├── package.json          # Project dependencies and scripts
-├── .gitignore            # Files and folders to ignore in Git
+### 📍 Home Page  
+![Structure](/project.png)  
+
 
 ---
 
