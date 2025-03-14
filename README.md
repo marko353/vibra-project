@@ -110,6 +110,6 @@ vibra/
 ## 📩 Contact  
 💡 For questions, suggestions, or collaboration opportunities, feel free to reach out:  
 
-📧 **Email:**[](markostojanovic353@gmail.com)  
-💻 **GitHub:** [yourusername](https://github.com/marko353)  
-🔗 **LinkedIn:** [Your Name](https://www.linkedin.com/in/marko-stojanovic-87992b250/)  
+📧 **Email:**[markostojanovic353@gmail.com](markostojanovic353@gmail.com)  
+💻 **GitHub:** [https://github.com/marko353](https://github.com/marko353)  
+🔗 **LinkedIn:** [https://www.linkedin.com/in/marko-stojanovic-87992b250/](https://www.linkedin.com/in/marko-stojanovic-87992b250/)  
