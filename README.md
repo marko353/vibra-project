@@ -46,10 +46,108 @@ The application uses:
 
   ## 🚀 Installation and Setup  
 
+  ### 📌 **Frontend**
+
 Follow these steps to set up and run the project locally.
+1. Clone the repository:
 
-### 1️⃣ Clone the repository
+    ```bash
+    git clone https://github.com/your-username/vibra.git
+    cd vibra
+    ```
 
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Set up environment variables:
+
+    Create a `.env` file in the root of the project and add the following variables:
+
+    ```bash
+    MONGO_URI=<your_mongodb_atlas_connection_string>
+    CLOUD_STORAGE_URL=<your_cloud_storage_url>
+    GOOGLE_CLIENT_ID=<your_google_oauth_client_id>
+    GOOGLE_CLIENT_SECRET=<your_google_oauth_client_secret>
+    ```
+
+4. Run the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+## Backend Setup and Installation
+
+This section covers how to set up and install the backend for the VibrA dating application.
+
+### Prerequisites
+
+Before you begin, make sure you have the following:
+
+- **Node.js** (>=14.x)
+- **MongoDB Atlas** account for the database
+- **Cloudinary** or another cloud storage service for image hosting
+- **Google OAuth credentials** for authentication (Client ID and Secret)
+
+### Installation Steps
+
+1. **Clone the repository:**
+
+    Clone the backend repository to your local machine:
+
+    ```bash
+    git clone https://github.com/marko353/vibra-backend
+    cd vibra-backend
+    ```
+
+2. **Install dependencies:**
+
+    Make sure you have all the necessary dependencies installed by running:
+
+    ```bash
+    npm install
+    ```
+
+3. **Set up environment variables:**
+
+    In the root of the project, create a `.env` file and add the following variables:
+
+    ```bash
+    MONGO_URI=<your_mongodb_atlas_connection_string>
+    CLOUD_STORAGE_URL=<your_cloud_storage_url>
+    GOOGLE_CLIENT_ID=<your_google_oauth_client_id>
+    GOOGLE_CLIENT_SECRET=<your_google_oauth_client_secret>
+    JWT_SECRET=<your_jwt_secret_key>
+    PORT=5000
+    ```
+
+    Make sure to replace the placeholders with your actual values for MongoDB, Cloud storage, and Google OAuth credentials.
+
+4. **Run the server:**
+
+    You can now start the backend server with:
+
+    ```bash
+    npx nodemon server.js
+    ```
+
+    This will start the server with **Nodemon** for auto-reloading during development.
+
+### Endpoints
+
+Here are the main backend endpoints for the VibrA application:
+
+- **POST /auth/google** - Google OAuth authentication
+- **POST /auth/register** - Register a new user
+- **POST /auth/login** - Login an existing user
+- **GET /profile/:id** - Fetch user profile by ID
+- **POST /profile/upload** - Upload images (via Cloud storage)
+- **GET /users** - Get a list of all users
+- **POST /chat** - Send a message in a chat
+- **GET /chat/:userId** - Get chat history with a specific user
 
 
   
