@@ -44,9 +44,15 @@ The application uses:
 
 - ---
 
-## 🚀 Installation and Setup  
+  ## 🚀 Installation and Setup  
 
-### 1️⃣ Clone the repository  
+Follow these steps to set up and run the project locally.
+
+### 1️⃣ Clone the repository
+
+
+
+  
 
 ## 📸 Image Management  
 🖼️ Users can **upload profile images**, stored on cloud services like **Cloudinary** or **AWS S3**.  
@@ -56,7 +62,9 @@ The application uses:
 
 ---
 ## Structure
-vibra/
+
+
+ **vibra/**
  ├── backend/
  │   ├── controllers/    # Logic for handling API requests
  │   ├── models/         # MongoDB schemas and data models
