@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa'; // Import ikonice
 import "../assets/styles/slider.scss";
 
 interface User {
@@ -8,9 +9,9 @@ interface User {
 }
 
 interface ProfileSliderProps {
-  images: string[]; 
+  images: string[];
   user: User | null;
-  selectedUser?: User | null; // Dodato: prop za selektovanog korisnika
+  selectedUser?: User | null;
 }
 
 const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) => {
@@ -25,13 +26,9 @@ const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) =>
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
-  
   const calculateAge = (birthDate: string): number => {
     if (!birthDate) return 0;
-
     const birth = new Date(birthDate);
-   
-
     const today = new Date();
     let age = today.getFullYear() - birth.getFullYear();
     const monthDiff = today.getMonth() - birth.getMonth();
@@ -41,46 +38,44 @@ const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) =>
     return age;
   };
 
-  const userToDisplay = selectedUser || user; // Koristi selektovanog korisnika, ako postoji
+  const userToDisplay = selectedUser || user;
 
   useEffect(() => {
     if (userToDisplay?.birthDate) {
-      console.log("User birth date:", userToDisplay.birthDate);  // Log za korisnički datum rođenja
+      console.log("User birth date:", userToDisplay.birthDate);
     }
   }, [userToDisplay]);
 
   return (
     <div className="profile-slider">
       <div className="slider-container">
-        {/* Prikaz imena i godina unutar slidera */}
         {userToDisplay && (
           <div className="user-info">
             <h1>{userToDisplay.fullName}</h1>
-            <p>{calculateAge(userToDisplay.birthDate)}</p> {/* Prikazivanje godina */}
+            <p>{calculateAge(userToDisplay.birthDate)}</p>
           </div>
         )}
 
-        {/* Slika */}
-        {images && images.length > 0 ? (
-          <div className="image-container">
+        <div className="image-container">
+          {images.length > 0 ? (
             <img
               src={images[currentImageIndex]}
               alt={`Profile ${currentImageIndex}`}
               className="profile-image"
             />
-            {images.length > 1 && (
-              <>
-                <button className="prev" onClick={goToPreviousImage}>&lt;</button>
-                <button className="next" onClick={goToNextImage}>&gt;</button>
-              </>
-            )}
-          </div>
-        ) : (
-          <div className="no-image">No images available</div>
-        )}
+          ) : (
+            <FaUserCircle className="default-icon" size={100} />
+          )}
+
+          {images.length > 1 && (
+            <>
+              <button className="prev" onClick={goToPreviousImage}>&lt;</button>
+              <button className="next" onClick={goToNextImage}>&gt;</button>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Sakrij dugme ako je selektovan korisnik za chat */}
       {!selectedUser && (
         <div className="edit-button-container">
           <button className="edit-button" onClick={() => navigate('/editPhotos')}>

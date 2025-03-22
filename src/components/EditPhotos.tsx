@@ -107,8 +107,9 @@ const EditPhotos: React.FC = ({}) => {
 
   return (
     <div className="profile-page">
-      <ProfileSidebar />
+      
     <div className="profile-photos">
+    <ProfileSidebar />
       <h1 className="profile-photos-title">Profile Photos</h1>
       <div className="card-container">
         {Array.from({ length: 9 }).map((_, index) => (

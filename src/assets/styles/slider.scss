@@ -4,7 +4,9 @@
   align-items: center;
   margin-top: 40px;
   margin-bottom: 40px;
-  left: 3rem;
+  left: 1rem;
+  z-index: 0; 
+
  
   
 
@@ -121,6 +123,7 @@
   .profile-slider {
     position: relative;
     height: 100%;  // Da bi slider zauzeo celokupnu visinu
+    z-index: 1;  // Da bude iznad slike
   }
   
   .user-info {
@@ -151,5 +154,11 @@
       font-weight: 300;
     }
   }
+  .default-icon {
+    color: #ccc; // Neutralna boja
+    display: block;
+    margin: 20px auto;
+  }
+  
   
 }

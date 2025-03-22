@@ -100,6 +100,9 @@ const ChatDashboard: React.FC = () => {
   }
 
   return (
+  
+    
+   
     <div className="profile-page">
       <ChatList
         currentUser={{
@@ -126,7 +129,7 @@ const ChatDashboard: React.FC = () => {
         selectedUser={selectedUser}
       />
     </div>
-   
+    
   );
 };
 
