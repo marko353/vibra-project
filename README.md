@@ -149,18 +149,6 @@ Here are the main backend endpoints for the VibrA application:
 - **POST /chat** - Send a message in a chat
 - **GET /chat/:userId** - Get chat history with a specific user
 
-## Testiranje
-
-Ovaj projekat koristi [Jest](https://jestjs.io/) kao alat za testiranje. Testovi su napisani u TypeScript-u i pokreću se u okruženju zasnovanom na `jsdom` za simulaciju browser okruženja.
-
-### Pokretanje testova
-
-Da bi pokrenuo testove, koristi sledeću komandu:
-
-```bash
-npm run test
-
-  
 
 ## 📸 Image Management  
 🖼️ Users can **upload profile images**, stored on cloud services like **Cloudinary** or **AWS S3**.  
@@ -200,6 +188,17 @@ npm run test
 *Chat with other users in real-time.*  
 
 ---
+
+## Testiranje
+
+Ovaj projekat koristi [Jest](https://jestjs.io/) kao alat za testiranje. Testovi su napisani u TypeScript-u i pokreću se u okruženju zasnovanom na `jsdom` za simulaciju browser okruženja.
+
+### Pokretanje testova
+
+Da bi pokrenuo testove, koristi sledeću komandu:
+
+```bash
+npm run test
 
 ## 📩 Contact  
 💡 For questions, suggestions, or collaboration opportunities, feel free to reach out:  
