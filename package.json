@@ -51,6 +51,7 @@
     "jest": "^29.7.0",
     "jest-dashboard": "^0.3.1",
     "jest-environment-jsdom": "^29.7.0",
+    "jest-html-reporter": "^4.1.0",
     "jest-transform-css": "^6.0.2",
     "jest-transform-stub": "^2.0.0",
     "prettier": "^3.4.2",
