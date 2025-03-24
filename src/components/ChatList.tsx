@@ -20,7 +20,7 @@ interface ChatSidebarProps {
   onUserSelect: (user: User) => void;
 }
 
-const socket = io("http://localhost:5000");
+const socket = io("https://vibra-backend-production-c7bc.up.railway.app");
 
 const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect }) => {
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
@@ -62,7 +62,7 @@ const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect
     const fetchLastMessages = async () => {
       try {
         if (!currentUser) return;
-        const response = await axios.get(`http://localhost:5000/api/messages/last/${currentUser._id}`);
+        const response = await axios.get(`https://vibra-backend-production-c7bc.up.railway.app/api/messages/last/${currentUser._id}`);
         const messagesMap: { [key: string]: string } = {};
         response.data.forEach((msg: { _id: string; lastMessage: string }) => {
           messagesMap[msg._id] = msg.lastMessage;

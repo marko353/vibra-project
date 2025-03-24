@@ -16,7 +16,7 @@ interface ChatProps {
   onClose: () => void;
 }
 
-const socket = io("http://localhost:5000");
+const socket = io("https://vibra-backend-production-c7bc.up.railway.app");
 
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
@@ -30,7 +30,7 @@ useEffect(() => {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:5000/api/messages/conversations/${currentUserId}/${selectedUser._id}`, {
+      const response = await axios.get(`https://vibra-backend-production-c7bc.up.railway.app/api/messages/conversations/${currentUserId}/${selectedUser._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessages(response.data); // Sačuvaj poruke u state-u
@@ -81,7 +81,7 @@ useEffect(() => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:5000/api/messages/send", newMessage, {
+      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/messages/send", newMessage, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // Dodaj poruku iz baze u stanje
