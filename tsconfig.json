@@ -4,7 +4,9 @@
     "jsx": "react-jsx",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+     "outDir": "./dist",
+    "rootDir": "./src"
   },
   "files": [],
   "references": [
