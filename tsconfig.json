@@ -1,15 +1,15 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "noUnusedLocals": false,
-    "noUnusedParameters": false
-  }
-
+    "noUnusedParameters": false,
+    "types": ["node", "jest"]
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }
 
