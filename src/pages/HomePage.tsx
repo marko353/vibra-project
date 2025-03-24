@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../assets/styles/home.scss';
 import Navbar from '../components/Navbar';
 import Modal from '../components/Modal';
