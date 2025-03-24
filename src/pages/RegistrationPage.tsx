@@ -103,7 +103,7 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
       <ToastContainer position="top-right" autoClose={2000} />
       <div className="register-box">
         <img
-          src="./src/assets/images/Page0.png"
+          src="/Page0.png"
           alt="Logo"
           className="form-logo"
         />

@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick, onRegisterClick }) => {
       <nav className="navbar">
         {/* Logo */}
         <div className="navbar-logo">
-          <img src="./public/logo.svg" alt="Vibra Logo" />
+          <img src="/logo.svg" alt="Vibra Logo" />
         </div>
 
         {/* Desktop linkovi */}

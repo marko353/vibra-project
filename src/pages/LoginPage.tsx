@@ -61,7 +61,7 @@ const Login: React.FC<LoginProps> = ({ }) => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <img src="./src/assets/images/Page0.png" alt="Logo" className="form-logo" />
+        <img src="/Page0.png" alt="Logo" className="form-logo" />
         <h2>Welcome!</h2>
         <p>Sign in to continue</p>
         <form onSubmit={handleSubmit(onSubmit)}>
