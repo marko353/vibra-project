@@ -31,7 +31,7 @@ const Login: React.FC<LoginProps> = ({ }) => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await axios.post('https://vibra-backend-production-c7bc.up.railway.app/api/auth/login', {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
         email: data.email,
         password: data.password,
       });

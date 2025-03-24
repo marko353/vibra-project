@@ -29,7 +29,7 @@ const ChatDashboard: React.FC = () => {
     const fetchUserImages = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile-pictures", {
+        const response = await axios.get("http://localhost:5000/api/user/profile-pictures", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setImages(response.data.profilePictures || []);
@@ -46,7 +46,7 @@ const ChatDashboard: React.FC = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile", {
+        const response = await axios.get("http://localhost:5000/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -63,7 +63,7 @@ const ChatDashboard: React.FC = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/all-users", {
+        const response = await axios.get("http://localhost:5000/api/user/all-users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);

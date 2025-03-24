@@ -49,7 +49,7 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
     try {
       console.log("✅ Pre slanja podataka na server");
 
-      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/auth/register", {
+      const response = await axios.post("http://localhost:5000/api/auth/register", {
         name: data.fullName,
         username: data.email.split('@')[0],
         email: data.email,

@@ -22,7 +22,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/auth/logout");
+      await axios.post("http://localhost:5000/api/auth/logout");
 
       localStorage.removeItem("userToken");
       localStorage.removeItem("currentUser");

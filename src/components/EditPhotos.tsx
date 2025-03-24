@@ -23,7 +23,7 @@ const EditPhotos: React.FC = ({}) => {
   const fetchImages = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile-pictures", {
+      const response = await axios.get("http://localhost:5000/api/user/profile-pictures", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -47,7 +47,7 @@ const EditPhotos: React.FC = ({}) => {
     setUploading(true);
 
     try {
-      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/user/upload-profile-picture", formData, {
+      const response = await axios.post("http://localhost:5000/api/user/upload-profile-picture", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,7 +75,7 @@ const EditPhotos: React.FC = ({}) => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/user/save-profile-pictures", { images }, {
+      await axios.post("http://localhost:5000/api/user/save-profile-pictures", { images }, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
