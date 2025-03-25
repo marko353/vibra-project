@@ -5,16 +5,13 @@ import "../assets/styles/editPhotos.scss";
 import ProfileSidebar from "./ProfileSidebar"
 import FilterSettings from './FilterSettings';
 
-
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const EditPhotos: React.FC = ({}) => {
-
   const [images, setImages] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
 
   useEffect(() => {
     fetchImages();
@@ -23,7 +20,7 @@ const EditPhotos: React.FC = ({}) => {
   const fetchImages = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile-pictures", {
+      const response = await axios.get(`${API_BASE_URL}/api/user/profile-pictures`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -47,7 +44,7 @@ const EditPhotos: React.FC = ({}) => {
     setUploading(true);
 
     try {
-      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/user/upload-profile-picture", formData, {
+      const response = await axios.post(`${API_BASE_URL}/api/user/upload-profile-picture`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,7 +72,7 @@ const EditPhotos: React.FC = ({}) => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/user/save-profile-pictures", { images }, {
+      await axios.post(`${API_BASE_URL}/api/user/save-profile-pictures`, { images }, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -107,61 +104,51 @@ const EditPhotos: React.FC = ({}) => {
 
   return (
     <div className="profile-page">
-      
-    <div className="profile-photos">
-    <ProfileSidebar />
-      <h1 className="profile-photos-title">Profile Photos</h1>
-      <div className="card-container">
-        {Array.from({ length: 9 }).map((_, index) => (
-          <div className="photo-card" key={index}>
-            <div className="image-box">
-              {images[index] ? (
-                <>
-                  <img className="profile-image" src={images[index]} alt={`Profile ${index + 1}`} />
-                  <button className="delete-button" onClick={() => handleDeleteImage(index)}>X</button>
-                </>
-              ) : (
-                <label className="placeholder" onClick={() => handleClickUpload(index)}>
-                  +
-                </label>
+      <div className="profile-photos">
+        <ProfileSidebar />
+        <h1 className="profile-photos-title">Profile Photos</h1>
+        <div className="card-container">
+          {Array.from({ length: 9 }).map((_, index) => (
+            <div className="photo-card" key={index}>
+              <div className="image-box">
+                {images[index] ? (
+                  <>
+                    <img className="profile-image" src={images[index]} alt={`Profile ${index + 1}`} />
+                    <button className="delete-button" onClick={() => handleDeleteImage(index)}>X</button>
+                  </>
+                ) : (
+                  <label className="placeholder" onClick={() => handleClickUpload(index)}>
+                    +
+                  </label>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageChange(e, index)}
+                  style={{ display: 'none' }}
+                  ref={(el) => (fileInputRefs.current[index] = el)}
+                />
+              </div>
+              {images[index] && (
+                <button className="change-image-button" onClick={() => handleClickUpload(index)}>
+                  Change Image
+                </button>
               )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleImageChange(e, index)}
-                style={{ display: 'none' }}
-                ref={(el) => (fileInputRefs.current[index] = el)}
-              />
             </div>
-            {images[index] && (
-              <button className="change-image-button" onClick={() => handleClickUpload(index)}>
-                Change Image
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-      
+          ))}
+        </div>
 
-      <div className="button-container">
-        <button
-          className="preview-button"
-          onClick={handlePreview}
-        >
-          Back
-        </button>
-        <button
-          className="save-button"
-          onClick={handleSave}
-          disabled={uploading || images.length === 0}
-        >
-          {uploading ? 'Uploading...' : 'Save'}
-        </button>
+        <div className="button-container">
+          <button className="preview-button" onClick={handlePreview}>
+            Back
+          </button>
+          <button className="save-button" onClick={handleSave} disabled={uploading || images.length === 0}>
+            {uploading ? 'Uploading...' : 'Save'}
+          </button>
+        </div>
       </div>
+      <FilterSettings />
     </div>
-    <FilterSettings />
-    </div>
-    
   );
 };
 

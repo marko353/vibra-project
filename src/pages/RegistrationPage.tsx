@@ -45,11 +45,13 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
     }
   }, [isOpen, reset]);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const onSubmit = async (data: any) => {
     try {
       console.log("✅ Pre slanja podataka na server");
 
-      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/auth/register", {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         name: data.fullName,
         username: data.email.split('@')[0],
         email: data.email,
@@ -62,8 +64,6 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
       
       toast.success("`Successfully registered. You can now log in to your account.`");
 
-
-      
       console.log("🎉 Toast notifikacija bi trebalo da se pojavi!");
 
       // ⏳ Sačekaj 1 sekundu pre zatvaranja modala

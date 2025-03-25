@@ -20,6 +20,8 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Login: React.FC<LoginProps> = ({ }) => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Login: React.FC<LoginProps> = ({ }) => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await axios.post('https://vibra-backend-production-c7bc.up.railway.app/api/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email: data.email,
         password: data.password,
       });

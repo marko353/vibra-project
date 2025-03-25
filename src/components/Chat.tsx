@@ -16,7 +16,8 @@ interface ChatProps {
   onClose: () => void;
 }
 
-const socket = io("https://vibra-backend-production-c7bc.up.railway.app");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const socket = io(API_BASE_URL);
 
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
@@ -24,23 +25,23 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Učitavanje poruka iz baze za selektovanog korisnika
-useEffect(() => {
-  if (!selectedUser) return;
+  useEffect(() => {
+    if (!selectedUser) return;
 
-  const fetchMessages = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get(`https://vibra-backend-production-c7bc.up.railway.app/api/messages/conversations/${currentUserId}/${selectedUser._id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setMessages(response.data); // Sačuvaj poruke u state-u
-    } catch (error) {
-      console.error("Greška pri preuzimanju poruka:", error);
-    }
-  };
+    const fetchMessages = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${API_BASE_URL}/api/messages/conversations/${currentUserId}/${selectedUser._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setMessages(response.data); // Sačuvaj poruke u state-u
+      } catch (error) {
+        console.error("Greška pri preuzimanju poruka:", error);
+      }
+    };
 
-  fetchMessages();
-}, [selectedUser, currentUserId]);
+    fetchMessages();
+  }, [selectedUser, currentUserId]);
 
   // Socket.io konekcija i listener za primanje poruka
   useEffect(() => {
@@ -81,7 +82,7 @@ useEffect(() => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/messages/send", newMessage, {
+      const response = await axios.post(`${API_BASE_URL}/api/messages/send`, newMessage, {
         headers: { Authorization: `Bearer ${token}` },
       });
       // Dodaj poruku iz baze u stanje

@@ -5,9 +5,6 @@ import Slider from "../components/Slider";
 import Chat from "../components/Chat";
 import ChatList from "../components/ChatList";
 
-
-
-
 interface User {
   _id: string;
   fullName: string;
@@ -15,6 +12,7 @@ interface User {
   profilePictures?: string[];
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ChatDashboard: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -29,7 +27,7 @@ const ChatDashboard: React.FC = () => {
     const fetchUserImages = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile-pictures", {
+        const response = await axios.get(`${API_BASE_URL}/api/user/profile-pictures`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setImages(response.data.profilePictures || []);
@@ -46,11 +44,11 @@ const ChatDashboard: React.FC = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/profile", {
+        const response = await axios.get(`${API_BASE_URL}/api/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
-        setCurrentUserId(response.data._id);  // Set currentUserId here
+        setCurrentUserId(response.data._id);
       } catch (error) {
         console.error("Failed to fetch user data:", error);
       }
@@ -63,7 +61,7 @@ const ChatDashboard: React.FC = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://vibra-backend-production-c7bc.up.railway.app/api/user/all-users", {
+        const response = await axios.get(`${API_BASE_URL}/api/user/all-users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);
@@ -100,9 +98,6 @@ const ChatDashboard: React.FC = () => {
   }
 
   return (
-  
-    
-   
     <div className="profile-page">
       <ChatList
         currentUser={{
@@ -123,13 +118,8 @@ const ChatDashboard: React.FC = () => {
         />
       )}
 
-      <Slider
-        images={sliderImages}
-        user={selectedUser || user}
-        selectedUser={selectedUser}
-      />
+      <Slider images={sliderImages} user={selectedUser || user} selectedUser={selectedUser} />
     </div>
-    
   );
 };
 

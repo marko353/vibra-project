@@ -10,9 +10,7 @@ interface User {
   fullName: string;
   profilePictures?: string[];
   birthDate: string;
-
 }
-
 
 interface ChatSidebarProps {
   chats: User[];
@@ -20,13 +18,13 @@ interface ChatSidebarProps {
   onUserSelect: (user: User) => void;
 }
 
-const socket = io("https://vibra-backend-production-c7bc.up.railway.app");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const socket = io(API_BASE_URL);
 
 const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect }) => {
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const [unreadMessages, setUnreadMessages] = useState<{ [key: string]: number }>({});
   const [lastMessages, setLastMessages] = useState<{ [key: string]: string }>({});
- 
 
   const navigate = useNavigate();
 
@@ -62,7 +60,7 @@ const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect
     const fetchLastMessages = async () => {
       try {
         if (!currentUser) return;
-        const response = await axios.get(`https://vibra-backend-production-c7bc.up.railway.app/api/messages/last/${currentUser._id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/messages/last/${currentUser._id}`);
         const messagesMap: { [key: string]: string } = {};
         response.data.forEach((msg: { _id: string; lastMessage: string }) => {
           messagesMap[msg._id] = msg.lastMessage;

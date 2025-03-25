@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa"; // Dodata ikonica korisnika
 import { useNavigate } from "react-router-dom";
@@ -16,13 +16,15 @@ interface UserAvatarProps {
   onLogout: () => void;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("https://vibra-backend-production-c7bc.up.railway.app/api/auth/logout");
+      await axios.post(`${API_BASE_URL}/api/auth/logout`);
 
       localStorage.removeItem("userToken");
       localStorage.removeItem("currentUser");
