@@ -12,6 +12,16 @@ The application uses:
 🔹 User image management  
 
 ---
+## Deployment
+
+### Frontend  
+The application is deployed on **Vercel** and can be accessed via the following link:  
+🔗 [VibrA - Live App](https://vibra-project.vercel.app/)
+
+### Backend  
+The backend is hosted on **Railway**. To interact with the API, use the following base URL:  
+🔗 [Railway Backend](https://vibra-backend-production-c7bc.up.railway.app/)
+---
 
 ## 📌 Table of Contents  
 - [🛠️ Technologies](#️-technologies)  
@@ -189,16 +199,19 @@ Here are the main backend endpoints for the VibrA application:
 
 ---
 
-## Testiranje
+## Testing  
 
-Ovaj projekat koristi [Jest](https://jestjs.io/) kao alat za testiranje. Testovi su napisani u TypeScript-u i pokreću se u okruženju zasnovanom na `jsdom` za simulaciju browser okruženja.
+This project uses [Jest](https://jestjs.io/) as the testing framework. Tests are written in TypeScript and run in a `jsdom` environment to simulate a browser environment.  
 
-### Pokretanje testova
+### Running Tests  
 
-Da bi pokrenuo testove, koristi sledeću komandu:
+To run the tests, use the following command:  
 
 ```bash
 npm run test
+
+---
+
 
 ## 📩 Contact  
 💡 For questions, suggestions, or collaboration opportunities, feel free to reach out:  

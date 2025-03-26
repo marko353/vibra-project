@@ -1,4 +1,8 @@
-// General container for the login modal
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .login-container {
   display: flex;
   justify-content: center;
