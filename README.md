@@ -12,13 +12,13 @@ The application uses:
 🔹 User image management  
 
 ---
-## Deployment
+### Deployment
 
-### Frontend  
+## Frontend  
 The application is deployed on **Vercel** and can be accessed via the following link:  
 🔗 [VibrA - Live App](https://vibra-project.vercel.app/)
 
-### Backend  
+## Backend  
 The backend is hosted on **Railway**. To interact with the API, use the following base URL:  
 🔗 [Railway Backend](https://vibra-backend-production-c7bc.up.railway.app/)
 ---
@@ -205,10 +205,11 @@ This project uses [Jest](https://jestjs.io/) as the testing framework. Tests are
 
 ### Running Tests  
 
-To run the tests, use the following command:  
-
+To run the tests, use the following command: 
+ 
 ```bash
-npm run test
+*npm run test
+
 
 ---
 
