@@ -15,12 +15,13 @@ The application uses:
 ### Deployment
 
 ## Frontend  
-The application is deployed on **Vercel** and can be accessed via the following link:  
+The application is deployed on Vercel and can be accessed via the following link:  
 🔗 [VibrA - Live App](https://vibra-project.vercel.app/)
 
 ## Backend  
-The backend is hosted on **Railway**. To interact with the API, use the following base URL:  
+The backend is hosted on Railway. To interact with the API, use the following base URL:  
 🔗 [Railway Backend](https://vibra-backend-production-c7bc.up.railway.app/)
+
 ---
 
 ## 📌 Table of Contents  
@@ -102,6 +103,8 @@ Before you begin, make sure you have the following:
 - **Cloudinary** or another cloud storage service for image hosting
 - **Google OAuth credentials** for authentication (Client ID and Secret)
 
+---
+
 ### Installation Steps
 
 1. **Clone the repository:**
@@ -174,6 +177,21 @@ Here are the main backend endpoints for the VibrA application:
 
 
 ---
+## Testing  
+
+This project uses [Jest](https://jestjs.io/) as the testing framework. Tests are written in TypeScript and run in a `jsdom` environment to simulate a browser environment.  
+
+### Running Tests  
+
+To run the tests, use the following command:  
+
+```bash
+npm run test
+
+```
+
+
+---
 
 ## 🖼️ Screenshots  
 
@@ -199,19 +217,8 @@ Here are the main backend endpoints for the VibrA application:
 
 ---
 
-## Testing  
-
-This project uses [Jest](https://jestjs.io/) as the testing framework. Tests are written in TypeScript and run in a `jsdom` environment to simulate a browser environment.  
-
-### Running Tests  
-
-To run the tests, use the following command: 
- 
-```bash
-*npm run test
 
 
----
 
 
 ## 📩 Contact  
