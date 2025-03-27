@@ -15,8 +15,8 @@
     }
   
     .avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #ddd;
@@ -76,4 +76,35 @@
       }
     }
   }
-  
+  .chat-sidebar {
+    // ... (ostali stilovi)
+    height: 100vh; // Dodajte visinu 100vh
+    overflow-y: auto; // Omogućite skrolovanje
+    position: relative; // Dodajte relativnu poziciju
+    padding-bottom: 120px; // dodajemo padding, zbog tab buttons
+    @media (max-width: 480px) {
+        .current-user-container {
+            position: fixed;
+            top: 0;
+            background-color: lightgrey;
+            z-index: 10;
+            width: 100%;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+
+            .current-user {
+                .avatar {
+                    width: 80px;
+                    height: 80px;
+                }
+                .user-name {
+                    font-size: 28px;
+                }
+            }
+        }
+
+        .chat-list {
+            padding-top: 110px; // Prilagodite padding-top
+        }
+    }
+}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../assets/styles/editPhotos.scss";
 import ProfileSidebar from "./ProfileSidebar"
-import FilterSettings from './FilterSettings';
+// import FilterSettings from './FilterSettings';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -103,7 +103,8 @@ const EditPhotos: React.FC = ({}) => {
   };
 
   return (
-    <div className="profile-page">
+    <body>
+    <div className="profile-p">
       <div className="profile-photos">
         <ProfileSidebar />
         <h1 className="profile-photos-title">Profile Photos</h1>
@@ -147,8 +148,9 @@ const EditPhotos: React.FC = ({}) => {
           </button>
         </div>
       </div>
-      <FilterSettings />
+      {/* <FilterSettings /> */}
     </div>
+    </body>
   );
 };
 

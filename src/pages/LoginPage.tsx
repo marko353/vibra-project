@@ -25,11 +25,17 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Login: React.FC<LoginProps> = ({ }) => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { setUser } = useAuthContext(); // Dohvatamo setUser funkciju iz AuthContext
+  const { setUser } = useAuthContext();
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+
+  const jeMobilni = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -37,12 +43,10 @@ const Login: React.FC<LoginProps> = ({ }) => {
         email: data.email,
         password: data.password,
       });
-    
-      // Sačuvaj token i korisničke podatke u localStorage
+
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('currentUser', JSON.stringify(response.data));
 
-      // Ažuriraj stanje korisnika u kontekstu
       setUser({
         id: response.data.id,
         fullName: response.data.fullName,
@@ -50,10 +54,13 @@ const Login: React.FC<LoginProps> = ({ }) => {
         token: response.data.token,
       });
 
-      // Prikazivanje Toastify poruke
       toast.success("You have successfully logged in!");
 
-      navigate('/chatDashboard');
+      if (jeMobilni()) {
+        navigate('/chatDashboard'); // Preusmeravanje na chat na mobilnom
+      } else {
+        navigate('/chatDashboard'); // Preusmeravanje na desktop
+      }
     } catch (error) {
       console.error("Login error:", error);
       setError('Invalid email or password');

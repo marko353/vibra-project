@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 10px;
   left: 1rem;
   z-index: 0; 
 
@@ -13,8 +12,8 @@
   .slider-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
-    height: 500px; // Fiksna visina slidera
+    max-width: 500px;
+    height: 700px; // Fiksna visina slidera
     background: #ddd;
     margin-top: 0%;
     border-radius: 10px;
@@ -31,7 +30,7 @@
       display: flex;
       justify-content: flex-start; // Poravnanje sa leve strane
       align-items: center; // Poravnava ime i godine u horizontalnoj liniji
-      padding: 10px;
+      
       background-color: rgba(0, 0, 0, 0.3); // Tamna pozadina za tekst
       color: #fff; // Tekst svetle boje
       border-radius: 8px;
@@ -160,5 +159,15 @@
     margin: 20px auto;
   }
   
+  
+}
+@media (max-width: 480px) {
+
+  .profile-slider {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 100%;  
+    
+  }
   
 }

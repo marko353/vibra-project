@@ -1,17 +1,17 @@
 .chat-container {
   width: 55%;
-  height: 100%;  /* Podesi maksimalnu visinu */
+  height: 100%;
   background: #f4f4f4;
   display: flex;
   flex-direction: column;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  position: fixed;  /* Korišćenje fixed umesto static */
-  top: 52%; /* Pozicioniraj od sredine ekrana */
-  left: 49%; 
-  transform: translate(-50%, -50%); /* Centriraj horizontalno i vertikalno */
-  z-index: 1000; /* Povećaj z-index da bi bio iznad ostalog sadržaja */
+  position: fixed;
+  top: 52%;
+  left: 49%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 
   .chat-header {
     padding: 12px;
@@ -20,9 +20,22 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
-  
+
+    .back-arrow {
+      position: absolute;
+      left: 10px;
+      font-size: 24px;
+      color: #ff9800; /* Narandžasta boja */
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #f57c00;
+      }
+    }
+
     .user-avatar {
       width: 50px;
       height: 50px;
@@ -31,25 +44,26 @@
       background-position: center;
       background-color: #ccc;
       display: inline-block;
-      margin-right: 10px;
+      margin: 0 10px;
     }
-  
+
     .user-name {
       font-size: 20px;
       font-weight: bold;
+      margin-left: 10px;
     }
-  
+
     .close-chat {
       position: absolute;
       top: 8px;
-      left: 25rem;
+      right: 10px;
       font-size: 24px;
       color: lightgray;
       background: none;
       border: none;
       cursor: pointer;
       transition: color 0.3s ease;
-  
+
       &:hover {
         color: #f57c00;
       }
@@ -114,7 +128,7 @@
       transition: all 0.3s ease;
       background-color: #fafafa;
       color: #333;
-      max-width: 90%; /* Širina input polja skoro cele širine */
+      max-width: 90%;
       
       &:focus {
         border-color: #ff4500;
@@ -141,6 +155,27 @@
       &:active {
         transform: scale(0.98);
       }
+    }
+  }
+}
+
+/* Stilovi za mobilne uređaje */
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 1001;
+  }
+
+  .chat-header {
+    .close-chat {
+      left: auto;
+      right: 8px;
     }
   }
 }
