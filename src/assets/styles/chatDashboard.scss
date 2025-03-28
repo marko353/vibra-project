@@ -1,95 +1,111 @@
 .profile-page {
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background: url("../images/chatDas.webp") no-repeat center center;
-  background-size: cover;
+  background: url("../images/chatDas.webp") center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    pointer-events: none;
-  }
+.profile-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+}
 
-  .content {
-    flex-grow: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
+.profile-page .content {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
 
-  .chat-list-container,
-  .profile-content {
-    padding: 10px;
-  }
+.profile-page .chat-list-container,
+.profile-page .profile-content {
+  padding: 10px;
+}
 
-  .tab-buttons {
-    display: none;
-  }
+.profile-page .tab-buttons {
+  display: none;
+}
 
-  @media (max-width: 768px) {
-    .tab-buttons {
+@media (max-width: 768px) {
+  .profile-page .tab-buttons {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       display: flex;
       justify-content: space-around;
-      background-color: #fff;
+      background-color: #f4f4f4;
       padding: 10px 0;
       z-index: 20;
-    }
+  }
 
-    .tab-buttons button {
-      background: none;
+  .profile-page .tab-buttons button {
+      background: linear-gradient(135deg, #63a4ff, #83c1ff);
       border: none;
-      padding: 10px;
+      padding: 12px 20px;
+      border-radius: 20px;
       font-size: 16px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       cursor: pointer;
-      width: 50%;
-    }
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      outline: none;
+      color: white;
+  }
 
-    .tab-buttons button.active {
-      color: #007bff;
-      font-weight: bold;
-    }
+  .profile-page .tab-buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
 
-    .content {
+  .profile-page .tab-buttons button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-page .tab-buttons button:focus {
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  }
+
+  .profile-page .tab-buttons button.active {
+      background: linear-gradient(135deg, #007bff, #56b3ff);
+      font-weight: 600;
+  }
+
+  .profile-page .content {
       padding-bottom: 60px;
-    }
+  }
 
-    .chat-list-container {
+  .profile-page .chat-list-container {
       display: none;
-    }
+  }
 
-    .content.chat-active .chat-list-container {
+  .profile-page .content.chat-active .chat-list-container {
       display: flex;
-    }
+  }
 
-    .content.profile-active .profile-content {
+  .profile-page .content.profile-active .profile-content {
       display: flex;
-    }
+  }
 
-    .content.chat-active .profile-content {
+  .profile-page .content.chat-active .profile-content {
       display: none;
-    }
   }
 }
 
 .chat-sidebar {
-  width: 200px;
+  width: 250px;
   height: 100vh;
-  background-color: #114d89;
-  border-right: 1px solid #ddd;
+  background-color: #f4f4f4;
+  border-right: 1px solid #e0e0e0;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -97,102 +113,115 @@
   position: fixed;
   left: 0;
   top: 0;
+}
 
-  h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 15px 0;
-    text-align: center;
-  }
+.chat-sidebar h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 15px 0 5px 0;
+  text-align: center;
+  color: #333;
+}
 
-  .chat-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.chat-sidebar .chat-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 20px;
+}
 
-    .chat-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.2s;
+.chat-sidebar .chat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
-      &:hover {
-        background-color: #e9ecef;
-      }
+.chat-sidebar .chat-item:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+.chat-sidebar .avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-      .chat-info {
-        display: flex;
-        flex-direction: column;
+.chat-sidebar .chat-info {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 55px);
+  gap: 6px;
+}
 
-        .chat-name {
-          font-weight: bold;
-          font-size: 14px;
-        }
+.chat-sidebar .chat-info .chat-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-        .last-message {
-          font-size: 12px;
-          color: #777;
-        }
-      }
+.chat-sidebar .chat-info .last-message {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-      .chat-avatar {
-        position: relative;
-        display: inline-block;
+.chat-sidebar .chat-avatar {
+  position: relative;
+  display: inline-block;
+}
 
-        .online-dot {
-          position: absolute;
-          bottom: 4px;
-          right: 4px;
-          width: 10px;
-          height: 10px;
-          background-color: #4caf50;
-          border-radius: 50%;
-          border: 2px solid white;
-        }
-      }
+.chat-sidebar .chat-avatar .online-dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  border: 2px solid white;
+}
 
-      .unread-badge {
-        background-color: red;
-        color: white;
-        padding: 4px 8px;
-        border-radius: 12px;
-        font-size: 12px;
-        margin-left: 8px;
-      }
-    }
-  }
+.chat-sidebar .unread-badge {
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 8px;
 }
 
 @media (min-width: 481px) {
   .profile-page {
-    background-color: #777;
+      background-color: #777;
   }
-  .profile-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-    height: auto;
- 
+
+  .profile-page .profile-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+      height: auto;
   }
 
   .chat-sidebar {
-    display: flex;
+      display: flex;
   }
 
-  .profile-slider {
-    margin-top: 10px;
+  .profile-page .profile-slider {
+      margin-top: 10px;
   }
 }

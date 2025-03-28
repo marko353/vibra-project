@@ -7,7 +7,7 @@
     padding: 10px;
     background: #ffffff;
     border-radius: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease ;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   
     &:hover {
@@ -15,8 +15,8 @@
     }
   
     .avatar {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #ddd;
@@ -91,7 +91,6 @@
             width: 100%;
             padding: 10px;
             border-bottom: 1px solid #eee;
-
             .current-user {
                 .avatar {
                     width: 80px;
@@ -104,7 +103,7 @@
         }
 
         .chat-list {
-            padding-top: 110px; // Prilagodite padding-top
+            padding-top: 10px; // Prilagodite padding-top
         }
     }
 }
