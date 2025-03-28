@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "../assets/styles/chat.scss";
@@ -19,12 +19,22 @@ interface ChatProps {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const socket = io(API_BASE_URL);
 
+const messagesReducer = (state: Message[], action: { type: string; payload?: Message[] | Message }) => {
+  switch (action.type) {
+    case "SET_MESSAGES":
+      return action.payload as Message[];
+    case "ADD_MESSAGE":
+      return [...state, action.payload as Message];
+    default:
+      return state;
+  }
+};
+
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, dispatch] = useReducer(messagesReducer, []);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Učitavanje poruka iz baze za selektovanog korisnika
   useEffect(() => {
     if (!selectedUser) return;
 
@@ -34,7 +44,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
         const response = await axios.get(`${API_BASE_URL}/api/messages/conversations/${currentUserId}/${selectedUser._id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setMessages(response.data); // Sačuvaj poruke u state-u
+        dispatch({ type: "SET_MESSAGES", payload: response.data });
       } catch (error) {
         console.error("Greška pri preuzimanju poruka:", error);
       }
@@ -43,19 +53,13 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     fetchMessages();
   }, [selectedUser, currentUserId]);
 
-  // Socket.io konekcija i listener za primanje poruka
   useEffect(() => {
     if (!currentUserId) return;
     socket.emit("join", currentUserId);
 
     const messageListener = (newMessage: Message) => {
       console.log("📩 Primljena poruka:", newMessage);
-      if (
-        (newMessage.receiverId === currentUserId && newMessage.senderId === selectedUser?._id) ||
-        (newMessage.senderId === currentUserId && newMessage.receiverId === selectedUser?._id)
-      ) {
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-      }
+      dispatch({ type: "ADD_MESSAGE", payload: newMessage });
     };
 
     socket.on("receiveMessage", messageListener);
@@ -65,12 +69,10 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     };
   }, [currentUserId, selectedUser]);
 
-  // Automatsko skrolovanje do poslednje poruke
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Slanje poruke: čuvanje u bazi preko API-ja, a potom emitovanje preko socket-a
   const sendMessage = async () => {
     if (message.trim() === "" || !selectedUser?._id) return;
 
@@ -85,9 +87,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
       const response = await axios.post(`${API_BASE_URL}/api/messages/send`, newMessage, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Dodaj poruku iz baze u stanje
-      setMessages((prevMessages) => [...prevMessages, response.data]);
-      // Emituj poruku putem socket-a
+      dispatch({ type: "ADD_MESSAGE", payload: response.data });
       socket.emit("sendMessage", response.data);
       setMessage("");
     } catch (error) {
@@ -101,14 +101,12 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     }
   };
 
-  const avatarURL = selectedUser?.profilePictures?.[0];
-
   return (
     <div className="chat-container">
       <div className="chat-header">
         <div
           className="user-avatar"
-          style={{ backgroundImage: `url(${avatarURL || ""})` }}
+          style={{ backgroundImage: `url(${selectedUser?.profilePictures?.[0] || ""})` }}
         ></div>
         <div className="user-info">
           <span className="user-name">{selectedUser?.fullName}</span>
