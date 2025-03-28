@@ -203,25 +203,80 @@
   margin-left: 8px;
 }
 
-@media (min-width: 481px) {
-  .profile-page {
-      background-color: #777;
-  }
-
-  .profile-page .profile-content {
+@media (max-width: 768px) {
+  .profile-page .tab-buttons {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      width: 100%;
-      height: auto;
+      justify-content: space-around;
+      background-color: #f4f4f4;
+      padding: 10px 0;
+      z-index: 20;
+      
   }
 
-  .chat-sidebar {
+  .profile-page .tab-buttons button {
+      background: linear-gradient(135deg, #ff6f61, #e55a4f); // Promenjena boja pozadine
+      border: none;
+      padding: 10px 18px; // Malo smanjen padding
+      border-radius: 25px; // Veći border-radius za zaobljeniji izgled
+      font-size: 15px; // Malo smanjena veličina fonta
+      font-family: 'Arial', sans-serif; // Promenjen font
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25); // Promenjena senka
+      outline: none;
+      color: white;
+      font-weight: 500; // Dodata težina fonta
+  }
+
+  .profile-page .tab-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.35); // Promenjena senka pri hover-u
+  }
+
+  .profile-page .tab-buttons button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Promenjena senka pri aktiviranju
+  }
+
+  .profile-page .tab-buttons button:focus {
+      box-shadow: 0 0 0 2px rgba(255, 111, 97, 0.5); // Promenjena senka pri fokusiranju
+  }
+
+  .profile-page .tab-buttons button.active {
+      background: linear-gradient(135deg, #e55a4f, #ff6f61); // Promenjena boja aktivnog dugmeta
+      font-weight: 600;
+  }
+
+  .profile-page .content {
+      padding-bottom: 60px;
+  }
+
+  .profile-page .chat-list-container {
+      display: none;
+  }
+
+  .profile-page .content.chat-active .chat-list-container {
       display: flex;
   }
 
-  .profile-page .profile-slider {
-      margin-top: 10px;
+  .profile-page .content.profile-active .profile-content {
+      display: flex;
   }
+
+  .profile-page .content.chat-active .profile-content {
+      display: none;
+  }
+}
+@media (max-width: 480px) {
+.profile-page {
+  background: none;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+}
 }
