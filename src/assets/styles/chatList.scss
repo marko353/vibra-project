@@ -1,157 +1,154 @@
-/* Resetovanje osnovnih stilova */
+/* Reset osnovnih stilova */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Stilovi za chat sidebar */
-.chat-sidebar {
-  width: 280px;
-  height: 100vh;
-  border-right: 1px solid #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  background: #f9f9f9;
-  gap: 15px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 20px 0;
-  box-sizing: border-box;
-
-  h2 {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 20px 20px;
-      text-align: left;
-      color: #333;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-
-  .chat-list {
+  
+  /* Stilovi za chat sidebar */
+  .chat-sidebar {
+    width: 300px;
+    height: 100vh;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    gap: 15px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 15px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+  
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
+      text-align: center;
+    }
+  
+    .chat-list {
       flex-grow: 1;
       overflow-y: auto;
-      margin: 0;
-      padding: 0 20px;
-
+      padding-right: 10px;
+  
       .chat-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: #f9f9f9;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        position: relative;
+  
+        &:hover {
+          background: #f1f1f1;
+          transform: scale(1.02);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+  
+        .avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid #ddd;
+        }
+  
+        .chat-info {
           display: flex;
-          align-items: center;
-          gap: 15px;
-          padding: 15px;
-          background-color: #ffffff;
-          border-radius: 12px;
-          cursor: pointer;
-          transition: background-color 0.3s ease, box-shadow 0.3s ease;
-          width: 100%;
-          box-sizing: border-box;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Suptilna senka */
-
-          &:hover {
-              background-color: #f0f0f0;
-              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Suptilna senka pri hoveru */
+          flex-direction: column;
+          flex-grow: 1;
+          overflow: hidden;
+  
+          .chat-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #222;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
-
-          .avatar {
-              width: 50px;
-              height: 50px;
-              border-radius: 50%;
-              object-fit: cover;
-              border: 1px solid #ddd;
+  
+          .last-message {
+            font-size: 14px;
+            color: #777;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
-
-          .chat-info {
-              display: flex;
-              flex-direction: column;
-              width: calc(100% - 65px);
-              gap: 6px;
-
-              .chat-name {
-                  font-weight: 600;
-                  font-size: 17px;
-                  color: #333;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-              }
-
-              .last-message {
-                  font-size: 15px;
-                  color: #666;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-              }
+        }
+  
+        .chat-avatar {
+          position: relative;
+          display: inline-block;
+  
+          .online-dot {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            width: 12px;
+            height: 12px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            border: 2px solid white;
           }
-
-          .chat-avatar {
-              position: relative;
-              display: inline-block;
-
-              .online-dot {
-                  position: absolute;
-                  bottom: 4px;
-                  right: 4px;
-                  width: 12px;
-                  height: 12px;
-                  background-color: #4caf50;
-                  border-radius: 50%;
-                  border: 2px solid white;
-              }
-          }
-
-          .unread-badge {
-              background-color: #e53935;
-              color: white;
-              padding: 6px 12px;
-              border-radius: 16px;
-              font-size: 14px;
-              margin-left: 10px;
-          }
+        }
+  
+        .unread-badge {
+          background-color: #e53935;
+          color: white;
+          padding: 5px 10px;
+          border-radius: 16px;
+          font-size: 12px;
+          font-weight: 600;
+          min-width: 20px;
+          text-align: center;
+        }
       }
+    }
   }
-}
-
-/* Stilovi za mobilne uređaje */
-@media (max-width: 480px) {
-  .chat-sidebar {
+  
+  /* Stilovi za mobilne uređaje */
+  @media (max-width: 768px) {
+    .chat-sidebar {
       width: 100%;
       height: 100%;
-      padding: 0;
-      position: relative;
-      box-sizing: border-box;
-  }
-
-  .chat-list {
-      gap: 10px;
       padding: 10px;
-
+      position: relative;
+    }
+  
+    .chat-list {
+      padding: 5px;
+  
       .chat-item {
-          padding: 15px;
-          border-radius: 10px;
+        padding: 10px;
+        border-radius: 10px;
       }
-
-      .chat-info {
-          width: calc(100% - 55px);
-      }
-
+  
       .avatar {
-          width: 45px;
-          height: 45px;
+        width: 45px;
+        height: 45px;
       }
-
-      .unread-badge {
-          font-size: 12px;
-          padding: 4px 8px;
-      }
-
+  
       .chat-name {
-          font-size: 15px;
+        font-size: 14px;
       }
-
+  
       .last-message {
-          font-size: 13px;
+        font-size: 12px;
       }
+  
+      .unread-badge {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+    }
   }
-}
+  

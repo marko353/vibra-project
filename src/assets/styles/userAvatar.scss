@@ -82,7 +82,8 @@
     overflow-y: auto; // Omogućite skrolovanje
     position: relative; // Dodajte relativnu poziciju
     padding-bottom: 120px; // dodajemo padding, zbog tab buttons
-    @media (max-width: 480px) {
+
+    @media (max-width: 768px) {
         .current-user-container {
             position: fixed;
             top: 0;

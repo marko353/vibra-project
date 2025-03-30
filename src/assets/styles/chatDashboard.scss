@@ -38,11 +38,7 @@
 
 
 
-@media (max-width: 480px) {
-  .profile-slider {
-      margin-top: 60px; /* Dodajemo marginu na vrhu slidera */
-  }
-
+@media (max-width: 768px) {
   .profile-page .tab-buttons {
       position: fixed;
       bottom: 0;
@@ -103,8 +99,8 @@
       bottom: -5px;
       left: 50%;
       transform: translateX(-50%);
-      width: 50%;
-      max-width: 60px;
+      width: 50%; /* Promena u procente */
+      max-width: 60px; /* Dodato maksimalnu širinu */
       height: 2px;
       background-color: #ff9800;
   }

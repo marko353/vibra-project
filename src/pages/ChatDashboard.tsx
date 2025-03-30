@@ -25,6 +25,7 @@ const ChatDashboard: React.FC = () => {
     const [activeTab, setActiveTab] = useState<"chat" | "profile">("profile");
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
 
+    // Fetch korisničkih slika odmah
     useEffect(() => {
         const fetchUserImages = async () => {
             try {
@@ -32,8 +33,9 @@ const ChatDashboard: React.FC = () => {
                 const response = await axios.get(`${API_BASE_URL}/api/user/profile-pictures`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setImages(response.data.profilePictures || []);
-                setSliderImages(response.data.profilePictures || []);
+                const userImages = response.data.profilePictures || [];
+                setImages(userImages);
+                setSliderImages(userImages); // Prikazivanje slika odmah
             } catch (error) {
                 console.error("Greška pri preuzimanju slika:", error);
             }
@@ -41,6 +43,7 @@ const ChatDashboard: React.FC = () => {
         fetchUserImages();
     }, []);
 
+    // Fetch korisničkih podataka
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -57,6 +60,7 @@ const ChatDashboard: React.FC = () => {
         fetchUserData();
     }, []);
 
+    // Fetch svih korisnika
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -72,6 +76,7 @@ const ChatDashboard: React.FC = () => {
         fetchUsers();
     }, []);
 
+    // Resizing window
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -82,6 +87,7 @@ const ChatDashboard: React.FC = () => {
 
     const handleSelectUser = (user: User) => {
         setSelectedUser(user);
+        setSliderImages(user.profilePictures || []);  // Prikazivanje slika korisnika
         setIsChatVisible(true);
         if (isMobile) {
             setActiveTab("chat");
@@ -91,8 +97,10 @@ const ChatDashboard: React.FC = () => {
     const handleCloseChat = () => {
         setSelectedUser(null);
         setIsChatVisible(false);
+        // Vraćanje slika trenutnog korisnika kada zatvoriš chat
+        setSliderImages(images); // Postavljanje slika trenutnog korisnika
         if (isMobile) {
-          setActiveTab("profile");
+            setActiveTab("profile");
         }
     };
 
@@ -106,7 +114,8 @@ const ChatDashboard: React.FC = () => {
 
     return (
         <div className="profile-page">
-            <div className={`content ${activeTab === "chat" && isMobile ? "chat-active" : ""} ${activeTab === "profile" && isMobile ? "profile-active" : ""}`}>
+            <div className={`content ${isMobile && activeTab === "chat" ? "chat-active" : ""}`}>
+                {/* Chat lista */}
                 <div className="chat-list-container">
                     <ChatList
                         currentUser={{
@@ -120,27 +129,30 @@ const ChatDashboard: React.FC = () => {
                     />
                 </div>
 
+                {/* Chat sadržaj - prikazuje se kada je selektovan korisnik */}
                 {isChatVisible && selectedUser && (
                     <div className="chat-content">
                         <Chat selectedUser={selectedUser} currentUserId={currentUserId} onClose={handleCloseChat} />
                     </div>
                 )}
 
-                   {activeTab === "profile" && !isChatVisible && (
-                        <div className="profile-content">
-              <Slider images={sliderImages} user={selectedUser || user} />
-                   </div>
-)}
+                {/* Slider - prikazuje slike korisnika */}
+                <div className={`profile-content ${isMobile ? "mobile-slider" : ""}`}>
+                    <Slider images={sliderImages} user={selectedUser || user} />
+                </div>
             </div>
 
-            <div className="tab-buttons">
-                <button className={activeTab === "chat" ? "active" : ""} onClick={() => handleTabClick("chat")}>
-                    Chat ️ 🗨️
-                </button>
-                <button className={activeTab === "profile" ? "active" : ""} onClick={() => handleTabClick("profile")}>
-                    Profil  👤
-                </button>
-            </div>
+            {/* Tabovi samo za mobilne uređaje */}
+            {isMobile && (
+                <div className="tab-buttons">
+                    <button className={activeTab === "chat" ? "active" : ""} onClick={() => handleTabClick("chat")}>
+                        Chat ️ 🗨️
+                    </button>
+                    <button className={activeTab === "profile" ? "active" : ""} onClick={() => handleTabClick("profile")}>
+                        Profil  👤
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
