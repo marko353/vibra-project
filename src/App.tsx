@@ -5,11 +5,6 @@ import ChatDashboard from "./pages/ChatDashboard";
 import { AuthProvider } from "./contex/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditPhotos from "./components/EditPhotos";
-import { io } from "socket.io-client";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-export const socket = io(API_BASE_URL);
-
 
 const App: React.FC = () => {
   return (
