@@ -22,7 +22,6 @@ const socket = io(API_BASE_URL);
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [, forceUpdate] = useState(0); // Dodaj novi state
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Učitavanje poruka iz baze za selektovanog korisnika
@@ -50,8 +49,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     socket.emit("join", currentUserId);
 
     const messageListener = (newMessage: Message) => {
-      setMessages([...messages, newMessage]); // Obezbeđuje ažuriranje
-      forceUpdate((prev) => prev + 1); // Forsira rerender UI-a
+      setMessages((prevMessages) => [...prevMessages, newMessage]); // Ispravljeno dodavanje poruka
     };
 
     socket.on("receiveMessage", messageListener);
@@ -59,7 +57,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     return () => {
       socket.off("receiveMessage", messageListener);
     };
-  }, [currentUserId, selectedUser, messages]); // Dodaj `messages` kao zavisnost
+  }, [currentUserId, selectedUser]); // Uklonjen `messages` iz zavisnosti
 
   // Automatsko skrolovanje do poslednje poruke
   useEffect(() => {
@@ -81,9 +79,8 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
       const response = await axios.post(`${API_BASE_URL}/api/messages/send`, newMessage, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Dodaj poruku iz baze u stanje
-      setMessages([...messages, response.data]);
-      // Emituj poruku putem socket-a
+
+      setMessages((prevMessages) => [...prevMessages, response.data]); // Ispravljeno dodavanje poruka
       socket.emit("sendMessage", response.data);
       setMessage("");
     } catch (error) {
