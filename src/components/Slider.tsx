@@ -4,17 +4,18 @@ import { FaUserCircle } from 'react-icons/fa'; // Import ikonice
 import "../assets/styles/slider.scss";
 
 interface User {
+  _id: string; // Dodajte ovo polje za _id
   fullName: string;
   birthDate: string;
 }
 
 interface ProfileSliderProps {
   images: string[];
-  user: User | null;
+  currentUserId : string | null;
   selectedUser?: User | null;
 }
 
-const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) => {
+const Slider: React.FC<ProfileSliderProps> = ({ images, currentUserId, selectedUser }) => {
   const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -38,7 +39,7 @@ const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) =>
     return age;
   };
 
-  const userToDisplay = selectedUser || user;
+  const userToDisplay = selectedUser ;
 
   useEffect(() => {
     if (userToDisplay?.birthDate) {
@@ -76,7 +77,7 @@ const Slider: React.FC<ProfileSliderProps> = ({ images, user, selectedUser }) =>
         </div>
       </div>
 
-      {!selectedUser && (
+      {selectedUser?._id == currentUserId && (
         <div className="edit-button-container">
           <button className="edit-button" onClick={() => navigate('/editPhotos')}>
             Edit Photos

@@ -138,7 +138,7 @@ const ChatDashboard: React.FC = () => {
 
                 {/* Slider - prikazuje slike korisnika */}
                 <div className={`profile-content ${isMobile ? "mobile-slider" : ""}`}>
-                    <Slider images={sliderImages} user={selectedUser || user} />
+                    <Slider images={sliderImages} currentUserId={currentUserId} selectedUser={selectedUser || user}  />
                 </div>
             </div>
 
