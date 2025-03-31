@@ -41,6 +41,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
                 );
 
                 setMessages(sortedMessages);
+                console.log("Preuzete poruke:", sortedMessages);
             } catch (error) {
                 console.error("❌ Greška pri preuzimanju poruka:", error);
             }
@@ -51,11 +52,12 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
 
     useEffect(() => {
         if (!currentUserId) return;
-        if (!socket.connected) { // Dodata provera
+        if (!socket.connected) {
             socket.emit("join", currentUserId);
         }
 
         const messageListener = (newMessage: Message) => {
+            console.log("Primljena poruka:", newMessage);
             setMessages((prevMessages) => {
                 if (prevMessages.some((msg) => msg._id === newMessage._id)) return prevMessages;
                 return [...prevMessages, newMessage];
@@ -70,6 +72,8 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     }, [currentUserId, selectedUser]);
 
     useEffect(() => {
+        console.log("Messages state changed:", messages);
+        console.log("messagesEndRef.current:", messagesEndRef.current);
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
@@ -78,19 +82,23 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
 
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.post(`${API_BASE_URL}/api/messages/send`, {
-                senderId: currentUserId,
-                receiverId: selectedUser._id,
-                message,
-            }, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await axios.post(
+                `${API_BASE_URL}/api/messages/send`,
+                {
+                    senderId: currentUserId,
+                    receiverId: selectedUser._id,
+                    message,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
 
             const savedMessage = response.data;
             setMessages((prevMessages) => [...prevMessages, savedMessage]);
             setMessage("");
-            // Uklanjanje slanja savedMessage, jer je server vec sacuvao poruku.
             socket.emit("sendMessage", response.data);
+            console.log("Poslata poruka:", savedMessage);
         } catch (error) {
             console.error("❌ Greška pri slanju poruke:", error);
         }
@@ -107,22 +115,24 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
     return (
         <div className="chat-container">
             <div className="chat-header">
-                <div
-                    className="user-avatar"
-                    style={{ backgroundImage: `url(${avatarURL || ""})` }}
-                ></div>
+                <div className="user-avatar" style={{ backgroundImage: `url(${avatarURL || ""})` }}></div>
                 <div className="user-info">
                     <span className="user-name">{selectedUser?.fullName}</span>
                 </div>
-                <button onClick={onClose} className="close-chat">X</button>
+                <button onClick={onClose} className="close-chat">
+                    X
+                </button>
             </div>
 
             <div className="chat-messages">
-                {messages.map((msg) => (
-                    <div key={msg._id} className={msg.senderId === currentUserId ? "message sent" : "message received"}>
-                        <p>{msg.message}</p>
-                    </div>
-                ))}
+                {messages.map((msg) => {
+                    console.log("Render poruke:", msg);
+                    return (
+                        <div key={msg._id} className={msg.senderId === currentUserId ? "message sent" : "message received"}>
+                            <p>{msg.message}</p>
+                        </div>
+                    );
+                })}
                 <div ref={messagesEndRef} />
             </div>
 
