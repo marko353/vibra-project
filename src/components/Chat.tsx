@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { io } from "socket.io-client";
+import { socket } from "../App";
 import axios from "axios";
 import "../assets/styles/chat.scss";
 
@@ -17,7 +17,7 @@ interface ChatProps {
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const socket = io(API_BASE_URL);
+
 
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
