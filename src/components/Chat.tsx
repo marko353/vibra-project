@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "../assets/styles/chat.scss";
@@ -18,12 +18,22 @@ interface ChatProps {
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const socket = io(API_BASE_URL);
 
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
     const [message, setMessage] = useState<string>("");
     const [messages, setMessages] = useState<Message[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+    const socket = useMemo(() => io(API_BASE_URL, {
+        transports: ["websocket"],
+        autoConnect: false
+    }), []);
+
+    const formatTime = (dateString?: string) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
 
     useEffect(() => {
         if (!selectedUser) return;
@@ -35,32 +45,29 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
                     `${API_BASE_URL}/api/messages/conversations/${currentUserId}/${selectedUser._id}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
-
-                const sortedMessages = response.data.sort(
-                    (a: Message, b: Message) => new Date(a.createdAt || "").getTime() - new Date(b.createdAt || "").getTime()
-                );
-
-                setMessages(sortedMessages);
-                console.log("Preuzete poruke:", sortedMessages);
+                setMessages(response.data);
             } catch (error) {
-                console.error("❌ Greška pri preuzimanju poruka:", error);
+                console.error("Greška pri preuzimanju poruka:", error);
             }
         };
 
         fetchMessages();
-    }, [selectedUser, currentUserId]);
+
+        return () => {
+            setMessages([]);
+        };
+    }, [selectedUser?._id, currentUserId]);
 
     useEffect(() => {
         if (!currentUserId) return;
-        if (!socket.connected) {
-            socket.emit("join", currentUserId);
-        }
+
+        socket.connect();
+        socket.emit("join", currentUserId);
 
         const messageListener = (newMessage: Message) => {
-            console.log("Primljena poruka:", newMessage);
-            setMessages((prevMessages) => {
-                if (prevMessages.some((msg) => msg._id === newMessage._id)) return prevMessages;
-                return [...prevMessages, newMessage];
+            setMessages(prev => {
+                if (prev.some(msg => msg._id === newMessage._id)) return prev;
+                return [...prev, newMessage];
             });
         };
 
@@ -68,12 +75,11 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
 
         return () => {
             socket.off("receiveMessage", messageListener);
+            socket.disconnect();
         };
-    }, [currentUserId, selectedUser]);
+    }, [currentUserId]);
 
     useEffect(() => {
-        console.log("Messages state changed:", messages);
-        console.log("messagesEndRef.current:", messagesEndRef.current);
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
@@ -87,7 +93,7 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
                 {
                     senderId: currentUserId,
                     receiverId: selectedUser._id,
-                    message,
+                    message: message.trim(),
                 },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -95,12 +101,12 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
             );
 
             const savedMessage = response.data;
-            setMessages((prevMessages) => [...prevMessages, savedMessage]);
+            setMessages(prev => [...prev, savedMessage]);
             setMessage("");
-            socket.emit("sendMessage", response.data);
-            console.log("Poslata poruka:", savedMessage);
+            socket.emit("sendMessage", savedMessage);
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
         } catch (error) {
-            console.error("❌ Greška pri slanju poruke:", error);
+            console.error("Greška pri slanju poruke:", error);
         }
     };
 
@@ -125,14 +131,15 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
             </div>
 
             <div className="chat-messages">
-                {messages.map((msg) => {
-                    console.log("Render poruke:", msg);
-                    return (
-                        <div key={msg._id} className={msg.senderId === currentUserId ? "message sent" : "message received"}>
-                            <p>{msg.message}</p>
-                        </div>
-                    );
-                })}
+                {messages.map((msg) => (
+                    <div key={msg._id || msg.createdAt} 
+                         className={msg.senderId === currentUserId ? "message sent" : "message received"}>
+                        <p>{msg.message}</p>
+                        <span className="message-time">
+                            {formatTime(msg.createdAt)}
+                        </span>
+                    </div>
+                ))}
                 <div ref={messagesEndRef} />
             </div>
 
@@ -142,9 +149,9 @@ const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => 
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
-                    placeholder="Type your message..."
+                    placeholder="Napišite poruku..."
                 />
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={sendMessage}>Pošalji</button>
             </div>
         </div>
     );

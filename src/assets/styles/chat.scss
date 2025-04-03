@@ -153,6 +153,21 @@
         }
       }
     }
+    .message {
+        position: relative;
+        
+        .message-time {
+            display: block;
+            font-size: 0.7rem;
+            color: #999;
+            text-align: right;
+            margin-top: 0.3rem;
+        }
+    
+        &.sent .message-time {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    }
   }
   @media (min-width: 1440px) {
     .chat-container {
