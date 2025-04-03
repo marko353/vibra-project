@@ -24,7 +24,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Chat: React.FC<ChatProps> = ({ selectedUser, currentUserId, onClose }) => {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isTyping, setIsTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout>();
   const [otherUserTyping, setOtherUserTyping] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
