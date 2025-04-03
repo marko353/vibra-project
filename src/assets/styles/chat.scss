@@ -345,20 +345,3 @@
       max-width: 100% !important;
     }
   }
-  
-  @media (max-width: 375px) {
-    .chat-container .chat-input {
-      input {
-        font-size: 14px;
-        padding: 10px 12px;
-      }
-  
-      button {
-        padding: 8px 14px;  // Smanjujemo padding
-        font-size: 12px;     // Manji font
-        width: 80px;         // Smanjujemo širinu ako je prevelika
-        max-width: 20%;      // Sprečava preklapanje na ekstremno malim ekranima
-      }
-    }
-  }
-  
