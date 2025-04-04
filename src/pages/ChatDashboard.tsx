@@ -113,6 +113,7 @@ const ChatDashboard: React.FC = () => {
     }
 
     return (
+        <div className="body">
         <div className="profile-page">
             <div className={`content ${isMobile && activeTab === "chat" ? "chat-active" : ""}`}>
                 {/* Chat lista */}
@@ -154,7 +155,9 @@ const ChatDashboard: React.FC = () => {
                 </div>
             )}
         </div>
+        </div>
     );
+   
 };
 
 export default ChatDashboard;

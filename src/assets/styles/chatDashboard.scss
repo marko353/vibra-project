@@ -1,4 +1,6 @@
-
+.body{
+  overflow: hidden;
+}
 .profile-page {
   background: url("../images/chatDas.webp") center/cover no-repeat;
   display: flex;
@@ -28,7 +30,7 @@
 
 .profile-page .chat-list-container,
 .profile-page .profile-content {
-  padding: 10px;
+  padding: 0px;
 }
 
 .profile-page .tab-buttons {
