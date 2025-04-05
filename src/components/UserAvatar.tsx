@@ -3,8 +3,7 @@ Update UserAvatar.tsx"/settings");
   };
 
   return (
-<div className="current-user" ref={dropdownRef}>
-  <div onClick={() => setIsMenuOpen(!isMenuOpen)}>
+<div className="current-user" ref={dropdownRef} onClick={() => setIsMenuOpen(!isMenuOpen)}>
     {/* avatar, user-info, strelica */}
   </div> {currentUscurrentUser.profilePictures[0]}
             alt={currentUser.fullName}
