@@ -40,16 +40,4 @@ Update UserAvatar.tsx"/settings");
   );
 };
 
-export default UserAvatar;"/settings");
-    setIsMenuOpen(false);
-  };
-
-  return (
-   <div className="user-info" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-      <div className="avatar-container">
-        {currentUs"/settings");
-    setIsMenuOpen(false);
-  };
-
-  return (
-   <div className="user-info" onClick={() => setIsMenuOpen( <div className="current-user" ref={dropdownRef} onClick={() => setIsMenuOpen(!isMenuOpen)}>ntUsI the beck 
+export default UserAvatar;
