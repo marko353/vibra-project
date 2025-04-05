@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import '../assets/styles/registration.scss';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,8 +14,16 @@ const schema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters long").nonempty("Password is required"),
   confirmPassword: z.string().min(6, "Confirm Password must be at least 6 characters long").nonempty("Confirm Password is required"),
   fullName: z.string().nonempty("Full name is required"),
-  birthDate: z.string().nonempty("Birth date is required").refine((val) => !isNaN(Date.parse(val)), {
-    message: "Please enter a valid birth date",
+  birthDate: z.date({
+    required_error: "Birth date is required",
+    invalid_type_error: "Please enter a valid birth date",
+  }).refine(date => {
+    const today = new Date();
+    const minDate = new Date();
+    minDate.setFullYear(today.getFullYear() - 100);
+    return date <= today && date >= minDate;
+  }, {
+    message: "Birth date must be between today and 100 years ago",
   }),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
@@ -28,8 +38,10 @@ interface RegistrationProps {
 const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
     resolver: zodResolver(schema),
   });
 
@@ -39,40 +51,36 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
         email: '',
         password: '',
         fullName: '',
-        birthDate: '',
+        birthDate: null,
         confirmPassword: '',
       });
+      setStartDate(null);
+      setServerError(null);
     }
   }, [isOpen, reset]);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const onSubmit = async (data: any) => {
+    setIsSubmitting(true);
     try {
-      console.log("✅ Pre slanja podataka na server");
-
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
+      await axios.post(`${API_BASE_URL}/api/auth/register`, {
         name: data.fullName,
         username: data.email.split('@')[0],
         email: data.email,
         password: data.password,
         fullName: data.fullName,
-        birthDate: data.birthDate,
+        birthDate: data.birthDate.toISOString().split('T')[0],
       });
 
-      console.log("✅ Registrovan korisnik:", response.data);
+      toast.success("Successfully registered. You can now log in to your account.");
       
-      toast.success("`Successfully registered. You can now log in to your account.`");
-
-      console.log("🎉 Toast notifikacija bi trebalo da se pojavi!");
-
-      // ⏳ Sačekaj 1 sekundu pre zatvaranja modala
       setTimeout(() => {
         onClose();
       }, 2000);
 
     } catch (error: any) {
-      console.error("❌ Greška prilikom registracije:", error);
+      console.error("Registration error:", error);
       if (error.response) {
         setServerError(error.response.data.message || "Server error occurred.");
       } else if (error.request) {
@@ -80,7 +88,14 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
       } else {
         setServerError("Unexpected error.");
       }
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setStartDate(date);
+    setValue("birthDate", date, { shouldValidate: true });
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -109,15 +124,29 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
         />
         <h2>Create an Account</h2>
         <p>Join us to get started</p>
-        <form key={isOpen ? 'open' : 'closed'} onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <input type="text" placeholder="Name" {...register("fullName")} autoFocus className={errors.fullName ? 'error-input' : ''} />
             {errors.fullName && <p className="error">{String(errors.fullName.message)}</p>}
           </div>
+          
           <div className="form-group">
-            <input type="date" placeholder="Birth Date" {...register("birthDate")} className={errors.birthDate ? 'error-input' : ''} />
+            <DatePicker
+              selected={startDate}
+              onChange={handleDateChange}
+              placeholderText="Birth Date"
+              className={`date-picker-input ${errors.birthDate ? 'error-input' : ''}`}
+              dateFormat="dd/MM/yyyy"
+              showYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={100}
+              maxDate={new Date()}
+              minDate={new Date(new Date().setFullYear(new Date().getFullYear() - 100))}
+              dropdownMode="select"
+            />
             {errors.birthDate && <p className="error">{String(errors.birthDate.message)}</p>}
           </div>
+          
           <div className="form-group">
             <input type="email" placeholder="Email" {...register("email")} className={errors.email ? 'error-input' : ''} />
             {errors.email && <p className="error">{String(errors.email.message)}</p>}
@@ -131,8 +160,12 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
             {errors.confirmPassword && <p className="error">{String(errors.confirmPassword.message)}</p>}
           </div>
           {serverError && <p className="server-error">{serverError}</p>}
-          <button type="submit" className="register-button" disabled={Object.keys(errors).length > 0}>
-            Sign Up
+          <button 
+            type="submit" 
+            className="register-button" 
+            disabled={Object.keys(errors).length > 0 || isSubmitting}
+          >
+            {isSubmitting ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
       </div>

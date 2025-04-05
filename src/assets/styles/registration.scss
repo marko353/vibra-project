@@ -1,152 +1,227 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .register-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 
-  .register-box {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2.5rem;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 400px;
-      max-height: 100vh;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .register-box {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        max-height: 100vh;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
 
-      h2 {
-          margin-bottom: 1vh;
-          color: #333;
-          font-size: 3vh;
-      }
+        h2 {
+            margin-bottom: 1vh;
+            color: #333;
+            font-size: 3vh;
+        }
 
-      p {
-          margin-bottom: 2vh;
-          color: #666;
-          font-size: 1.5vh;
-      }
+        p {
+            margin-bottom: 2vh;
+            color: #666;
+            font-size: 1.5vh;
+        }
 
-      .form-group {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 2vh;
-          text-align: left;
-      }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2vh;
+            text-align: left;
+        }
 
-      .form-group input {
-          width: 100%;
-          padding: 1.5vh;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          font-size: 2vh;
-          color: #333;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        .form-group input {
+            width: 100%;
+            padding: 1.5vh;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 2vh;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-          &:focus {
-              border-color: #ff4b4b;
-              box-shadow: #ff4b4b;
-              outline: none;
-          }
+            &:focus {
+                border-color: #ff4b4b;
+                box-shadow: #ff4b4b;
+                outline: none;
+            }
 
-          &::placeholder {
-              color: #999;
-          }
+            &::placeholder {
+                color: #999;
+            }
 
-          &.error-input {
-              border-color: #ff4b4b;
-          }
-      }
+            &.error-input {
+                border-color: #ff4b4b;
+            }
+        }
 
-      .error {
-          color: #ff4b4b;
-          font-size: 1.5vh;
-          margin-top: 0.5vh;
-          display: block;
-          animation: fadeIn 0.3s ease-in-out;
-      }
+        .error {
+            color: #ff4b4b;
+            font-size: 1.5vh;
+            margin-top: 0.5vh;
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
 
-      .register-button {
-          background: #ff6f61;
-          color: white;
-          border: none;
-          padding: 1.5vh;
-          width: 100%;
-          border-radius: 8px;
-          font-size: 2vh;
-          cursor: pointer;
-          transition: background 0.3s ease, transform 0.2s ease;
+        .register-button {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            padding: 1.5vh;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 2vh;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
 
-          &:hover {
-              background: #ff4b4b;
-              transform: translateY(-2px);
-          }
+            &:hover {
+                background: #ff4b4b;
+                transform: translateY(-2px);
+            }
 
-          &:active {
-              transform: translateY(0);
-          }
-      }
+            &:active {
+                transform: translateY(0);
+            }
+        }
 
-      .form-logo {
-          max-width: 20vh;
-          margin: 0 auto 1vh auto;
-          display: block;
-          border-radius: 8px;
-      }
+        .form-logo {
+            max-width: 20vh;
+            margin: 0 auto 1vh auto;
+            display: block;
+            border-radius: 8px;
+        }
 
-      .login-link {
-          margin-top: 2vh;
-          color: #666;
-          font-size: 1.5vh;
+        .login-link {
+            margin-top: 2vh;
+            color: #666;
+            font-size: 1.5vh;
 
-          a {
-              color: #ff6f61;
-              text-decoration: none;
-              font-weight: bold;
+            a {
+                color: #ff6f61;
+                text-decoration: none;
+                font-weight: bold;
 
-              &:hover {
-                  text-decoration: underline;
-              }
-          }
-      }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        /* Dodajte ove stilove u postojeći SCSS */
+
+.date-picker-input {
+    width: 100%;
+    padding: 1.5vh;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 2vh;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    cursor: pointer;
+  
+    &:focus {
+      border-color: #ff4b4b;
+      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+      outline: none;
+    }
+  
+    &.error-input {
+      border-color: #ff4b4b;
+    }
   }
+  
+  .react-datepicker {
+    font-family: inherit;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+    &__header {
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #eee;
+      border-radius: 8px 8px 0 0;
+    }
+  
+    &__navigation {
+      top: 10px;
+    }
+  
+    &__day {
+      &:hover {
+        background-color: #ff6f61;
+        color: white;
+      }
+  
+      &--selected {
+        background-color: #ff6f61;
+        color: white;
+      }
+    }
+  
+    &__year-dropdown {
+      border-radius: 8px;
+    }
+  }
+  
+  /* Responsivni stilovi */
+  @media (max-width: 480px) {
+    .date-picker-input {
+      padding: 1vh;
+      font-size: 1.5vh;
+    }
+  
+    .react-datepicker {
+      width: 100%;
+      max-width: 300px;
+  
+      &__month-container {
+        width: 100%;
+      }
+    }
+  }
+
+    }
 }
 
 @keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(-5px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 480px) {
-  .register-box {
-      .form-logo {
-          max-width: 15vh;
-          margin-bottom: 0.8vh;
-      }
+    .register-box {
+        .form-logo {
+            max-width: 15vh;
+            margin-bottom: 0.8vh;
+        }
 
-      .form-group input {
-          padding: 1vh;
-          font-size: 1.5vh;
-      }
+        .form-group input {
+            padding: 1vh;
+            font-size: 1.5vh;
+        }
 
-      .register-button {
-          padding: 1vh;
-          font-size: 1.5vh;
-      }
-  }
+        .register-button {
+            padding: 1vh;
+            font-size: 1.5vh;
+        }
+    }
 }
