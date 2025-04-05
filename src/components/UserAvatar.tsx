@@ -60,7 +60,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
   };
 
   return (
-    <div className="current-user" ref={dropdownRef} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+   <div className="user-info" onClick={() => setIsMenuOpen(!isMenuOpen)}>
       <div className="avatar-container">
         {currentUser.profilePictures?.[0] ? (
           <img
