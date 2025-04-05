@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { FaUserCircle, FaSignOutAlt, FaUserCog, FaCog } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../assets/styles/userAvatar.scss";
 
 interface User {
@@ -13,21 +12,18 @@ interface User {
 }
 
 interface UserAvatarProps {
-  currentUser: User;
-  onLogout: () => void;
+  currentUser: User | null;
+  onLogout: () => Promise<void> | void;
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
     };
@@ -36,18 +32,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await axios.post("http://localhost:5000/api/auth/logout");
-      localStorage.removeItem("userToken");
-      localStorage.removeItem("currentUser");
-      navigate("/");
-    } catch (err) {
-      console.error("Greška pri odjavi:", err);
-    }
-  };
+  }, [dropdownRef]);
 
   const navigateToProfile = () => {
     navigate("/profile");
@@ -59,20 +44,26 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
     setIsMenuOpen(false);
   };
 
+  if (!currentUser) {
+    return <div className="current-user">Loading...</div>;
+  }
+
   return (
     <div
       className="current-user"
       ref={dropdownRef}
       onClick={(e) => {
-        e.stopPropagation(); // sprečava zatvaranje menija na mobilnim
+        e.stopPropagation();
         setIsMenuOpen(!isMenuOpen);
       }}
+      aria-haspopup="true"
+      aria-expanded={isMenuOpen}
     >
       <div className="avatar-container">
         {currentUser.profilePictures?.[0] ? (
           <img
             src={currentUser.profilePictures[0]}
-            alt={currentUser.fullName}
+            alt={`Profile picture of ${currentUser.fullName}`}
             className="avatar"
           />
         ) : (
@@ -88,23 +79,33 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ currentUser }) => {
 
       <IoChevronDown className={`dropdown-icon ${isMenuOpen ? "open" : ""}`} />
 
-      <div
-        className={`dropdown-menu ${isMenuOpen ? "open" : ""}`}
-        onClick={(e) => e.stopPropagation()} // klik u meniju ne zatvara dropdown
-      >
-        <div className="menu-item" onClick={navigateToProfile}>
-          <FaUserCog className="icon" />
-          Profile
+      {isMenuOpen && (
+        <div
+          className="dropdown-menu open"
+          onClick={(e) => e.stopPropagation()}
+          role="menu"
+        >
+          <div className="menu-item" onClick={navigateToProfile} role="menuitem">
+            <FaUserCog className="icon" />
+            Profile
+          </div>
+          <div className="menu-item" onClick={navigateToSettings} role="menuitem">
+            <FaCog className="icon" />
+            Settings
+          </div>
+          <div 
+            className="menu-item logout" 
+            onClick={() => {
+              onLogout();
+              setIsMenuOpen(false);
+            }} 
+            role="menuitem"
+          >
+            <FaSignOutAlt className="icon" />
+            Logout
+          </div>
         </div>
-        <div className="menu-item" onClick={navigateToSettings}>
-          <FaCog className="icon" />
-          Settings
-        </div>
-        <div className="menu-item logout" onClick={handleLogout}>
-          <FaSignOutAlt className="icon" />
-          Logout
-        </div>
-      </div>
+      )}
     </div>
   );
 };

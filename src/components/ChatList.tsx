@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import "../assets/styles/chatList.scss";
 import UserAvatar from "./UserAvatar";
-import { useNavigate } from "react-router-dom";
+
 
 interface User {
     _id: string;
@@ -16,17 +16,23 @@ interface ChatSidebarProps {
     chats: User[];
     currentUser: User;
     onUserSelect: (user: User) => void;
+    onLogout: () => void; // Dodajemo onLogout u props
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const socket = io(API_BASE_URL);
 
-const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect }) => {
+const ChatList: React.FC<ChatSidebarProps> = ({ 
+    chats, 
+    currentUser, 
+    onUserSelect, 
+    onLogout // Prihvatamo onLogout iz propsa
+}) => {
     const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
     const [unreadMessages, setUnreadMessages] = useState<{ [key: string]: number }>({});
     const [lastMessages, setLastMessages] = useState<{ [key: string]: string }>({});
 
-    const navigate = useNavigate();
+  
 
     useEffect(() => {
         if (!currentUser) return;
@@ -79,17 +85,14 @@ const ChatList: React.FC<ChatSidebarProps> = ({ chats, currentUser, onUserSelect
         setUnreadMessages((prev) => ({ ...prev, [user._id]: 0 }));
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("userToken");
-        localStorage.removeItem("currentUser");
-        navigate("/");
-    };
+    // Uklonili smo lokalnu handleLogout funkciju jer koristimo onLogout iz propsa
 
     if (!currentUser) return <p>Učitavanje...</p>;
 
     return (
         <div className="chat-sidebar">
-            <UserAvatar currentUser={currentUser} onLogout={handleLogout} />
+            {/* Prosleđujemo onLogout u UserAvatar */}
+            <UserAvatar currentUser={currentUser} onLogout={onLogout} />
 
             <h2>Chat list</h2>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../assets/styles/chatDashboard.scss";
 import Slider from "../components/Slider";
 import Chat from "../components/Chat";
@@ -24,8 +25,9 @@ const ChatDashboard: React.FC = () => {
     const [currentUserId, setCurrentUserId] = useState<string>("");
     const [activeTab, setActiveTab] = useState<"chat" | "profile">("profile");
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
+    const navigate = useNavigate();
 
-    // Fetch korisničkih slika odmah
+    // Fetch user images
     useEffect(() => {
         const fetchUserImages = async () => {
             try {
@@ -35,15 +37,15 @@ const ChatDashboard: React.FC = () => {
                 });
                 const userImages = response.data.profilePictures || [];
                 setImages(userImages);
-                setSliderImages(userImages); // Prikazivanje slika odmah
+                setSliderImages(userImages);
             } catch (error) {
-                console.error("Greška pri preuzimanju slika:", error);
+                console.error("Error fetching user images:", error);
             }
         };
         fetchUserImages();
     }, []);
 
-    // Fetch korisničkih podataka
+    // Fetch user data
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -60,7 +62,7 @@ const ChatDashboard: React.FC = () => {
         fetchUserData();
     }, []);
 
-    // Fetch svih korisnika
+    // Fetch all users
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -76,7 +78,7 @@ const ChatDashboard: React.FC = () => {
         fetchUsers();
     }, []);
 
-    // Resizing window
+    // Handle window resize
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -85,9 +87,24 @@ const ChatDashboard: React.FC = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // Logout function
+    const handleLogout = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            localStorage.removeItem("token");
+            localStorage.removeItem("currentUser");
+            navigate("/");
+        } catch (error) {
+            console.error("Logout error:", error);
+        }
+    };
+
     const handleSelectUser = (user: User) => {
         setSelectedUser(user);
-        setSliderImages(user.profilePictures || []);  // Prikazivanje slika korisnika
+        setSliderImages(user.profilePictures || []);
         setIsChatVisible(true);
         if (isMobile) {
             setActiveTab("chat");
@@ -97,8 +114,7 @@ const ChatDashboard: React.FC = () => {
     const handleCloseChat = () => {
         setSelectedUser(null);
         setIsChatVisible(false);
-        // Vraćanje slika trenutnog korisnika kada zatvoriš chat
-        setSliderImages(images); // Postavljanje slika trenutnog korisnika
+        setSliderImages(images);
         if (isMobile) {
             setActiveTab("profile");
         }
@@ -109,55 +125,65 @@ const ChatDashboard: React.FC = () => {
     };
 
     if (!user) {
-        return <p>Loading...</p>;
+        return <div className="loading">Loading...</div>;
     }
 
     return (
         <div className="body">
-        <div className="profile-page">
-            <div className={`content ${isMobile && activeTab === "chat" ? "chat-active" : ""}`}>
-                {/* Chat lista */}
-                <div className="chat-list-container">
-                    <ChatList
-                        currentUser={{
-                            _id: user._id,
-                            fullName: user.fullName,
-                            profilePictures: images,
-                            birthDate: user.birthDate,
-                        }}
-                        chats={users}
-                        onUserSelect={handleSelectUser}
-                    />
+            <div className="profile-page">
+                <div className={`content ${isMobile && activeTab === "chat" ? "chat-active" : ""}`}>
+                    <div className="chat-list-container">
+                        <ChatList
+                            currentUser={{
+                                _id: user._id,
+                                fullName: user.fullName,
+                                profilePictures: images,
+                                birthDate: user.birthDate,
+                            }}
+                            chats={users}
+                            onUserSelect={handleSelectUser}
+                            onLogout={handleLogout}
+                        />
+                    </div>
+
+                    {isChatVisible && selectedUser && (
+                        <div className="chat-content">
+                            <Chat 
+                                selectedUser={selectedUser} 
+                                currentUserId={currentUserId} 
+                                onClose={handleCloseChat} 
+                            />
+                        </div>
+                    )}
+
+                    <div className={`profile-content ${isMobile ? "mobile-slider" : ""}`}>
+                        <Slider 
+                            images={sliderImages} 
+                            currentUserId={currentUserId} 
+                            selectedUser={selectedUser || user}  
+                        />
+                    </div>
                 </div>
 
-                {/* Chat sadržaj - prikazuje se kada je selektovan korisnik */}
-                {isChatVisible && selectedUser && (
-                    <div className="chat-content">
-                        <Chat selectedUser={selectedUser} currentUserId={currentUserId} onClose={handleCloseChat} />
+                {isMobile && (
+                    <div className="tab-buttons">
+                        <button 
+                            className={activeTab === "chat" ? "active" : ""} 
+                            onClick={() => handleTabClick("chat")}
+                        >
+                            Chat 🗨️
+                        </button>
+                        <button 
+                            className={activeTab === "profile" ? "active" : ""} 
+                            onClick={() => handleTabClick("profile")}
+                        >
+                            Profile 👤
+                        </button>
                     </div>
                 )}
-
-                {/* Slider - prikazuje slike korisnika */}
-                <div className={`profile-content ${isMobile ? "mobile-slider" : ""}`}>
-                    <Slider images={sliderImages} currentUserId={currentUserId} selectedUser={selectedUser || user}  />
-                </div>
             </div>
-
-            {/* Tabovi samo za mobilne uređaje */}
-            {isMobile && (
-                <div className="tab-buttons">
-                    <button className={activeTab === "chat" ? "active" : ""} onClick={() => handleTabClick("chat")}>
-                        Chat ️ 🗨️
-                    </button>
-                    <button className={activeTab === "profile" ? "active" : ""} onClick={() => handleTabClick("profile")}>
-                        Profil  👤
-                    </button>
-                </div>
-            )}
-        </div>
         </div>
     );
-   
 };
 
 export default ChatDashboard;
