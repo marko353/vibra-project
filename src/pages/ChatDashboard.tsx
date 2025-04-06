@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/styles/chatDashboard.scss";
+import '../assets/styles/chatDashboard.scss';
 import Slider from "../components/Slider";
 import Chat from "../components/Chat";
 import ChatList from "../components/ChatList";
@@ -27,7 +27,15 @@ const ChatDashboard: React.FC = () => {
     const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
     const navigate = useNavigate();
 
-    // Fetch user images
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial check
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     useEffect(() => {
         const fetchUserImages = async () => {
             try {
@@ -45,7 +53,6 @@ const ChatDashboard: React.FC = () => {
         fetchUserImages();
     }, []);
 
-    // Fetch user data
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -62,7 +69,6 @@ const ChatDashboard: React.FC = () => {
         fetchUserData();
     }, []);
 
-    // Fetch all users
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -78,16 +84,6 @@ const ChatDashboard: React.FC = () => {
         fetchUsers();
     }, []);
 
-    // Handle window resize
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-        };
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    // Logout function
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -130,7 +126,7 @@ const ChatDashboard: React.FC = () => {
 
     return (
         <div className="body">
-            <div className="profile-page">
+            <div className={`profile-page ${isChatVisible ? 'chat-open' : ''}`}>
                 <div className={`content ${isMobile && activeTab === "chat" ? "chat-active" : ""}`}>
                     <div className="chat-list-container">
                         <ChatList
@@ -148,33 +144,33 @@ const ChatDashboard: React.FC = () => {
 
                     {isChatVisible && selectedUser && (
                         <div className="chat-content">
-                            <Chat 
-                                selectedUser={selectedUser} 
-                                currentUserId={currentUserId} 
-                                onClose={handleCloseChat} 
+                            <Chat
+                                selectedUser={selectedUser}
+                                currentUserId={currentUserId}
+                                onClose={handleCloseChat}
                             />
                         </div>
                     )}
 
                     <div className={`profile-content ${isMobile ? "mobile-slider" : ""}`}>
-                        <Slider 
-                            images={sliderImages} 
-                            currentUserId={currentUserId} 
-                            selectedUser={selectedUser || user}  
+                        <Slider
+                            images={sliderImages}
+                            currentUserId={currentUserId}
+                            selectedUser={selectedUser || user}
                         />
                     </div>
                 </div>
 
                 {isMobile && (
                     <div className="tab-buttons">
-                        <button 
-                            className={activeTab === "chat" ? "active" : ""} 
+                        <button
+                            className={activeTab === "chat" ? "active" : ""}
                             onClick={() => handleTabClick("chat")}
                         >
                             Chat 🗨️
                         </button>
-                        <button 
-                            className={activeTab === "profile" ? "active" : ""} 
+                        <button
+                            className={activeTab === "profile" ? "active" : ""}
                             onClick={() => handleTabClick("profile")}
                         >
                             Profile 👤

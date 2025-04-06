@@ -11,7 +11,7 @@
     top: 50.5%;
     left: 47.5%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
+    z-index: 1001;
   
     .chat-header {
       padding: 12px;
@@ -317,8 +317,7 @@
       margin-top: 0.5px;
     }
   }
-  
-  // MOBILNI TELEFONI
+
   @media (max-width: 768px) {
     .chat-container {
       width: 100%;
@@ -328,6 +327,7 @@
       border-radius: 0;
       box-shadow: none;
       z-index: 1001;
+   
   
       .chat-header {
         .back-arrow {
