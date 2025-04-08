@@ -128,12 +128,39 @@
 
 @media (max-width: 768px) {
   .profile-slider {
-    top: 46%;
+    top: 49%;
     left: 50%;
     width: 100vw;
-    height: 93vh;
+    height: 100vh;
     transform: translate(-50%, -50%);
     border-radius: 0;
     box-shadow: none;
+  }
+
+  .edit-button-container {
+    position: absolute; /* Dodaj ovu liniju ako je nije bilo */
+    top: 85%; /* Ovo možeš podesiti na željenu visinu */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .edit-button {
+    width: 100%;
+    padding: 8px;
+    background-color: #ff6f61;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e55a4f;
+    }
   }
 }
