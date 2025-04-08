@@ -112,7 +112,7 @@ const ChatDashboard: React.FC = () => {
         setIsChatVisible(false);
         setSliderImages(images);
         if (isMobile) {
-            setActiveTab("profile");
+            setActiveTab("chat");
         }
     };
 

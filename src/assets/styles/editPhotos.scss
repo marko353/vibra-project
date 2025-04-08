@@ -1,24 +1,20 @@
 
-  
-  .profile-photos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: #f9f9f9;
-    z-index: 1;
-    position: relative;
-    width: 100%;  /* Osiguraj da zauzima celu širinu ekrana */
-    height: 100vh; /* Visina 100vh znači da zauzima celu visinu ekrana */
-    background-size: cover; 
-    background-position: center;
-    background-attachment: fixed;
-    background: url("../images/chatDas.webp") no-repeat center center;
-    background-size: cover;
-   
- 
-  }
+.profile-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background: url("../images/chatDas.webp") no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 
     .profile-photos-title {
       font-size: 26px;

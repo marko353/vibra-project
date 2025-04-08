@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../assets/styles/editPhotos.scss";
 import ProfileSidebar from "./ProfileSidebar"
-// import FilterSettings from './FilterSettings';
+
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

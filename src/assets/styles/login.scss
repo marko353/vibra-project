@@ -14,12 +14,12 @@
   left: 0;
   width: 100%;
   z-index: 9999;
-  padding: 0 20px; // Added some padding for responsiveness
-  pointer-events: none; // Disables interaction with the background
+  padding: 0 20px; 
+  pointer-events: none; 
 
-  // Centering the content (login box)
+ 
   .login-box {
-    background: #ffffff; // Light background for the login box
+    background: #ffffff; 
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -29,23 +29,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    pointer-events: auto; // Ensures the login box is interactive
+    pointer-events: auto; 
 
     // Logo styling
     .form-logo {
-      max-width: 160px; // Increased logo size
+      max-width: 160px;
       margin-bottom: 1rem;
     }
 
     h2 {
-      font-size: 2rem; // Increased font size for better visibility
+      font-size: 2rem;
       color: #333;
-      margin-bottom: 1.5rem; // Added more margin for spacing
+      margin-bottom: 1.5rem; 
     }
 
     p {
       color: #777;
-      margin-bottom: 2rem; // Increased margin for better spacing
+      margin-bottom: 2rem; 
       font-size: 1rem;
     }
 
@@ -63,7 +63,7 @@
     }
     
     .form-group input {
-      width: 100%; /* Postavi širinu na 100% da se prilagodi širinama roditeljskog elementa */
+      width: 100%;
       padding: 12px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -73,7 +73,7 @@
     
     .form-group input:focus {
       outline: none;
-      border-color: #ff6f61; /* Promeni boju border-a kad je input fokusiran */
+      border-color: #ff6f61;
     }
     
         &::placeholder {
@@ -111,10 +111,10 @@
       }
     }
 
-    // Register link for redirection to registration page
+  
     .register-link {
-      margin-top: 1.5rem; // Increased margin
-      font-size: 1rem; // Increased font size for better readability
+      margin-top: 1.5rem; 
+      font-size: 1rem;
       color: #666;
 
       a {
@@ -143,7 +143,6 @@
   }
 }
 
-// Mobile responsiveness
 @media (max-width: 480px) {
   .login-container {
     padding: 0 1rem;

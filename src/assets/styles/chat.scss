@@ -289,7 +289,7 @@
     30% { transform: translateY(-5px); }
   }
   
-  // VEĆI EKRANI
+
   @media (min-width: 1440px) {
     .chat-container {
       width: 54%;
@@ -297,7 +297,7 @@
     }
   }
   
-  // SREDNJI EKRANI
+
   @media (max-width: 1440px) {
     .chat-container {
       width: 45.3%;
@@ -306,7 +306,7 @@
     }
   }
   
-  // TABLETI I MANJI LAPTOPOVI
+
   @media (max-width: 1024px) {
     .chat-container {
       width: 60.2%;

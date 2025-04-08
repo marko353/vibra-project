@@ -1,4 +1,4 @@
-/* Reset osnovnih stilova */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  /* Stilovi za chat sidebar */
+
   .chat-sidebar {
     width: 300px;
     height: 100vh;
@@ -115,7 +115,7 @@
     }
   }
   
-  /* Stilovi za mobilne uređaje */
+
   @media (max-width: 768px) {
     .chat-sidebar {
       width: 100%;

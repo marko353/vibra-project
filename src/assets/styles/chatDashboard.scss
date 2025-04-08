@@ -1,4 +1,4 @@
-.body {
+body {
   width: 100%;
   height: 100%;
   top: 0;
@@ -12,9 +12,8 @@
   background: url("../images/chatDas.webp") center/cover no-repeat;
   display: flex;
   flex-direction: column;
-  height: auto;
   min-height: 100vh;
-  position: relative; /* Dodato za pozicioniranje before elementa */
+  position: relative;
 }
 
 .profile-page::before {
@@ -33,14 +32,13 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  padding-bottom: 60px; /* Ostavite mesta za tab-buttons */
-  position: relative; /* Dodato za z-index kontekst */
+  padding-bottom: 60px;
+  position: relative;
 }
 
 .profile-page .chat-list-container,
 .profile-page .profile-content {
-  padding: 0px;
+  padding: 0;
 }
 
 .profile-page .tab-buttons {
@@ -49,132 +47,130 @@
 
 @media (max-width: 768px) {
   .profile-page {
-      position: fixed; /* Da se content ne pomera kada se pojavi fixed tab-buttons */
-      width: 100%;
-      height: 100%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 
   .profile-page .tab-buttons {
-      position: fixed; /* Promenite u fixed da ostanu na dnu */
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background-color: #f4f4f4;
-      padding: 10px 0;
-      z-index: 20; /* Osigurajte da su iznad većine sadržaja */
-      border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    z-index: 20;
+    border-top: 1px solid #ddd;
   }
 
-  /* Vertikalna linija između dugmadi */
   .profile-page .tab-buttons::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1px;
-      height: 60%;
-      background-color: #ddd;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 60%;
+    background-color: #ddd;
   }
 
-  /* Uklanjanje vertikalne linije na poslednjem dugmetu */
   .profile-page .tab-buttons button:last-child::after {
-      content: none;
+    content: none;
   }
 
   .profile-page .tab-buttons button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: none;
-      border: none;
-      padding: 8px 16px;
-      font-size: 14px;
-      color: #333;
-      cursor: pointer;
-      outline: none;
-      position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    position: relative;
   }
 
   .profile-page .tab-buttons button i {
-      font-size: 20px;
-      margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 5px;
   }
 
   .profile-page .tab-buttons button.active {
-      color: #ff9800;
-      position: relative;
+    color: #ff9800;
+    position: relative;
   }
 
   .profile-page .tab-buttons button.active::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50%; /* Promena u procente */
-      max-width: 60px; /* Dodato maksimalnu širinu */
-      height: 2px;
-      background-color: #ff9800;
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 60px;
+    height: 2px;
+    background-color: #ff9800;
   }
 
   .profile-page .content {
-      padding-bottom: 60px; /* Ostavite mesta za tab-buttons */
-      overflow-y: auto; /* Osigurajte skrolovanje contenta */
-      position: relative; /* Za z-index kontekst */
+    padding-bottom: 60px;
+    overflow-y: auto;
+    position: relative;
   }
 
   .profile-page .chat-list-container {
-      display: none;
-      flex: 1; /* Da zauzme preostali prostor */
-      overflow-y: auto;
+    display: none;
+    flex: 1;
+    overflow-y: auto;
   }
 
   .profile-page .profile-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      flex: 1;
-      overflow-y: auto;
-      padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 20px;
   }
 
   .profile-page.chat-open .content {
-      padding-bottom: 0; /* Uklonite padding da chat može da preklopi */
+    padding-bottom: 0;
   }
 
   .profile-page.chat-open .chat-content {
-      position: absolute; /* Postavite chat da može da preklapa */
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; /* Puni ekran kada je otvoren */
-      background-color: white; /* Ili boja pozadine vašeg chata */
-      z-index: 30; /* Osigurajte da je chat iznad tab-buttons */
-      overflow-y: auto; /* Omogućite skrolovanje unutar chata */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 30;
+    overflow-y: auto;
   }
 
   .profile-page.chat-open .tab-buttons {
-      z-index: 20; /* Manji z-index od chat-content, bice preklopljeni */
+    z-index: 20;
   }
 
   .profile-page.chat-open .chat-list-container,
   .profile-page.chat-open .profile-content {
-      display: none !important; /* Sakrijte ostali sadržaj kada je chat otvoren */
+    display: none !important;
   }
 
   .profile-page .content.chat-active .chat-list-container {
-      display: flex;
+    display: flex;
   }
 
   .profile-page .content.profile-active .profile-content {
-      display: flex;
+    display: flex;
   }
 
   .profile-page .content.chat-active .profile-content {
-      display: none;
+    display: none;
   }
 }
