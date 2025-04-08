@@ -141,12 +141,12 @@
   }
 
   .edit-button-container {
-    position: absolute;
+    position: fixed;
     top: 48rem;  /* Postavljanje dugmeta malo na gore */
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
     text-align: center;
-    z-index: 10;
+    z-index: 1001;
   }
 }
