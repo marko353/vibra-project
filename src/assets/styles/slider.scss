@@ -129,12 +129,13 @@
 
 @media (max-width: 768px) {
   .profile-slider {
-    top: 46%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100vw;
-    height: 93vh;
-    transform: translate(-50%, -50%);
+    height: 94vh;
+    transform: none;
     border-radius: 0;
     box-shadow: none;
-  }
+    overflow-y: auto; 
+}
 }
