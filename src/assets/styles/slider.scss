@@ -1,47 +1,47 @@
 .profile-slider {
   position: fixed;
   top: 50%;
-  right: 0; // Slider stoji uz desnu ivicu ekrana
-  transform: translateY(-50%); // Centriranje po vertikali
-  width: 24vw; // Slider još uži
-  height: 80vh; 
+  right: 0;
+  transform: translateY(-50%);
+  width: 24vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 100;
   background: white;
-  border-radius: 16px 0 0 16px; // Zaobljeni samo levi uglovi
-  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15); // Blaga senka sa leve strane
-  overflow: hidden; // Da slike i sadržaj ne izlaze van granica
+  border-radius: 16px 0 0 16px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 
   .slider-container {
-    position: relative;
     width: 100%;
     height: 100%;
     background: #ddd;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   .user-info {
     position: absolute;
     top: 10px;
     left: 0;
-    right: 25%; // Ne završava se skroz desno
+    right: 25%;
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px 18px;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2), transparent);
     text-align: left;
-  
+
     h1 {
       font-size: 20px;
       font-weight: bold;
       color: #ff6f61;
       margin: 0;
     }
-  
+
     p {
       font-size: 18px;
       color: white;
@@ -49,9 +49,6 @@
       font-weight: bold;
     }
   }
-  
-  
-  
 
   .image-container {
     width: 100%;
@@ -82,6 +79,10 @@
     z-index: 10;
     opacity: 0.7;
     transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .prev {
@@ -90,11 +91,6 @@
 
   .next {
     right: 5px;
-  }
-
-  .prev:hover,
-  .next:hover {
-    opacity: 1;
   }
 
   .edit-button-container {
@@ -118,10 +114,10 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
 
-  .edit-button:hover {
-    background-color: #e55a4f;
+    &:hover {
+      background-color: #e55a4f;
+    }
   }
 
   .default-icon {
@@ -130,19 +126,13 @@
     margin: 20px auto;
   }
 }
-@media (max-width: 1024px) {
-  .profile-slider {
-   
-  }
-}
 
-/* Za mobilne ne diramo, ostaje isti */
 @media (max-width: 768px) {
   .profile-slider {
     top: 46%;
     left: 50%;
     width: 100vw;
-    height: 94vh;
+    height: 93vh;
     transform: translate(-50%, -50%);
     border-radius: 0;
     box-shadow: none;
