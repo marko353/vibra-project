@@ -122,7 +122,7 @@ const Registration: React.FC<RegistrationProps> = ({ onClose, isOpen }) => {
           alt="Logo"
           className="form-logo"
         />
-        <h2>Create an Account</h2>
+        <h2 className="form-title">Create an Account</h2>
         <p>Join us to get started</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">

@@ -189,6 +189,15 @@ To run the tests, use the following command:
 npm run test
 
 ```
+# Testing & QA
+
+- Developed **End-to-End (E2E) tests** using **Playwright** covering:
+  - Login and registration modals
+  - Homepage content validation
+  - UI responsiveness and user interaction flows
+- Tests are integrated into the workflow to ensure stability and prevent regressions.
+- Focus on real-user scenarios and cross-browser compatibility.
+
 
 
 ---

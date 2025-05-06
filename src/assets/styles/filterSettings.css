@@ -1,0 +1,44 @@
+.filter-settings-container .filter-settings {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.filter-settings-container .filter-settings-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.filter-settings-container .filter-setting {
+  margin-bottom: 20px;
+}
+.filter-settings-container .age-slider-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+.filter-settings-container .apply-filters-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+.filter-settings-container .apply-filters-btn:hover {
+  background-color: #ff4d4d;
+}
+.filter-settings-container .filter-setting .MuiSlider-root {
+  margin-top: 10px;
+}
+.filter-settings-container .filter-setting .MuiTypography-root {
+  font-size: 14px;
+  color: #333;
+}/*# sourceMappingURL=filterSettings.css.map */

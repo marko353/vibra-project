@@ -20,7 +20,7 @@ const Home: React.FC = () => {
       {/* Login dugme iznad Create Account dugmeta */}
       <div className="button-group">
         <div className="login-btn">
-          <a href="#" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>
+          <a  href="#" id="login-btn" onClick={(e) => { e.preventDefault(); setShowLoginModal(true); }}>
             Login
           </a>
         </div>

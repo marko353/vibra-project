@@ -1,0 +1,163 @@
+.profile-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background: url("../images/chatDas.webp") no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.profile-photos-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  width: 160px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px dashed #bbb;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.photo-card:hover {
+  border-color: #f44336;
+  transform: scale(1.05);
+}
+.photo-card .image-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.photo-card .image-box .profile-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 12px;
+}
+.photo-card .image-box .delete-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.photo-card .image-box .delete-button:hover {
+  background: rgb(255, 0, 0);
+  transform: scale(1.1);
+}
+.photo-card .placeholder {
+  font-size: 24px;
+  font-weight: bold;
+  color: #bbb;
+  cursor: pointer;
+}
+.photo-card .change-image-button {
+  position: absolute;
+  bottom: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: 0.3s;
+}
+.photo-card .change-image-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+}
+.button-container button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.button-container .preview-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+.button-container .preview-button:hover {
+  background-color: #ccc;
+  transform: translateY(-2px);
+}
+.button-container .save-button {
+  background-color: #f44336;
+  color: white;
+}
+.button-container .save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.button-container .save-button:hover:not(:disabled) {
+  background-color: #f44336;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .profile-photos .profile-sidebar,
+  .profile-photos .filter-settings-container {
+    display: none;
+  }
+  .card-container {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10px;
+  }
+  .photo-card {
+    width: 100%;
+    height: 150px;
+    margin-right: 0;
+  }
+}/*# sourceMappingURL=editPhotos.css.map */

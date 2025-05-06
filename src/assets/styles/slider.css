@@ -1,0 +1,152 @@
+@charset "UTF-8";
+.profile-slider {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 24vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.profile-slider .slider-container {
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.profile-slider .user-info {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 25%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2), transparent);
+  text-align: left;
+}
+.profile-slider .user-info h1 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6f61;
+  margin: 0;
+}
+.profile-slider .user-info p {
+  font-size: 18px;
+  color: white;
+  margin: 0;
+  font-weight: bold;
+}
+.profile-slider .image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-slider .profile-image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.profile-slider .prev,
+.profile-slider .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 50%;
+  z-index: 10;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.profile-slider .prev:hover,
+.profile-slider .next:hover {
+  opacity: 1;
+}
+.profile-slider .prev {
+  left: 5px;
+}
+.profile-slider .next {
+  right: 5px;
+}
+.profile-slider .edit-button-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  z-index: 10;
+}
+.profile-slider .edit-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #ff6f61;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.profile-slider .edit-button:hover {
+  background-color: #e55a4f;
+}
+.profile-slider .default-icon {
+  color: #ccc;
+  display: block;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  .profile-slider {
+    top: 49%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .edit-button-container {
+    position: absolute; /* Dodaj ovu liniju ako je nije bilo */
+    top: 83%; /* Ovo možeš podesiti na željenu visinu */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    z-index: 10;
+  }
+  .edit-button {
+    width: 100%;
+    padding: 8px;
+    background-color: #ff6f61;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .edit-button:hover {
+    background-color: #e55a4f;
+  }
+}/*# sourceMappingURL=slider.css.map */
